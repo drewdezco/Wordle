@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -22,11 +21,14 @@ public class FileHandler {
         File wordFile = new File(filePath);
         FileReader readFile = new FileReader(wordFile);
 
+        /*
         while (readFile.hasNext()) { //I believe in order to use readFile here like this it has to be a scanner
             for (int i = 0; i < readFile.length; i++) {
 
             }
         }
+
+         */
     }
     //generate a random number for use in pulling a random word
     public void getRand() {
@@ -40,7 +42,7 @@ public class FileHandler {
         //use the random number to pull that index from the words array
         String targetWord = fileWords.get(rI);
         //return this word as target word
-        Wordle.Wordle(targetWord);
+        //Wordle.Wordle(targetWord);
     }
 }
 
