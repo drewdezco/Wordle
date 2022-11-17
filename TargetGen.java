@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class FileHandler {
 
     private String filePath;
-    private ArrayList<String> fileWords = new ArrayList<>();
+    private ArrayList<String> fileWords = new ArrayList<String>();//added String
 
     //default constructor
-    public void FileHandler() {
+    public FileHandler() {
         filePath = null;
-    }
+    } //removed void
 
     //parameterized constructor
     public void FileHandler(String f) {
@@ -18,11 +18,11 @@ public class FileHandler {
     }
 
     //read the file and add each word to the array
-    public void fileRead() {
+    public void fileRead() throws FileNotFoundException {
         File wordFile = new File(filePath);
         FileReader readFile = new FileReader(wordFile);
 
-        while (readFile.hasNext()) {
+        while (readFile.hasNext()) { //I believe in order to use readFile here like this it has to be a scanner
             for (int i = 0; i < readFile.length; i++) {
 
             }
