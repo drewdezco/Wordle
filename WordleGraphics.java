@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class GUI {
+public class WordleGraphics {
 
     //instances of the data from wordle to be used by the GUI
     private String targetWord;

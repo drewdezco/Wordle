@@ -1,4 +1,4 @@
-public class Wordle {
+public class WordleGame {
 
     //take in target word as instance field
     private String targetWord;
