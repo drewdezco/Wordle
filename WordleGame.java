@@ -4,12 +4,12 @@ public class WordleGame {
     private String targetWord;
 
     //default constructor
-    public void Wordle() {
+    public WordleGame() {
         targetWord = null;
     }
 
     //parameterized constructor
-    public void Wordle(String t) {
+    public WordleGame(String t) {
         targetWord = t;
     }
 

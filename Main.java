@@ -2,7 +2,7 @@ public class Main {
 
     //objects of the other classes
     private static FileHandler fh = new FileHandler();
-    private static Wordle wrdl = new Wordle();
+    private static WordleGame wrdl = new WordleGame();
 
     public static void main(String[] args) {
 
