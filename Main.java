@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /**
  *Julia Barnes
  *Sarah Harrington
@@ -8,10 +10,21 @@
  */
 public class Main {
 
+    private static JFrame wordleFrame = new JFrame("Wordle++");
+
     //objects of the other classes
-    private static WordleGame wrdl = new WordleGame();
+    private static WordleGame wordle = new WordleGame();
 
     public static void main(String[] args) {
+        WordleGraphics wordleGraphicUserInterface = new WordleGraphics(wordleFrame);
+
+        wordleGraphicUserInterface.setup();
+
+        wordleFrame.addKeyListener(wordleGraphicUserInterface);
+
+        wordleFrame.pack(); //display window
+
+        wordleFrame.setVisible(true);
 
     }
 }
