@@ -15,10 +15,17 @@ import java.awt.event.KeyListener;
  * - If user guessed correctly, save score on scoreboard and display that to the user
  */
 public class WordleGraphics implements KeyListener {
-
     private int rowValue = 0; //counter to keep track of row value
     private int columnValue = 0; //counter to keep track of column value
     private  JFrame wordleFrame; //empty frame reference
+
+    private JPanel wordlePanel = new JPanel(); //create new panel for letters
+
+    private GridLayout wordleGrid = new GridLayout(6,5, 10, 10); //create new grid with 6 rows, five columns and 8x8 gap in between each grid
+
+    private  JLabel wordleLabels[][] = new JLabel[6][5]; //create 2d array for storing labels
+
+    private String userGuess[] = new String[5];
 
     /**
      * 1 argument constructor for Wordle Graphics
@@ -27,12 +34,6 @@ public class WordleGraphics implements KeyListener {
     public WordleGraphics(JFrame wordleFrame) {
         this.wordleFrame = wordleFrame;
     }
-
-    private JPanel wordlePanel = new JPanel(); //create new panel for letters
-
-    private GridLayout wordleGrid = new GridLayout(6,5, 10, 10); //create new grid with 6 rows, five columns and 8x8 gap in between each grid
-
-    private  JLabel wordleLabels[][] = new JLabel[6][5]; //create 2d array for storing labels
 
 
     /**
@@ -92,6 +93,17 @@ public class WordleGraphics implements KeyListener {
         label.setBackground(new Color(120, 124, 126));
     }
 
+    public void setColumnFormat(int option, int column) {
+        switch (option) {
+            case 1:setCorrectSpotAndCorrectLetterBoxFormat(wordleLabels[rowValue][column]);
+                break;
+            case 2:setIncorrectSpotAndCorrectLetterBoxFormat(wordleLabels[rowValue][column]);
+                break;
+            case 3:setIncorrectSpotAndLetterBoxFormat(wordleLabels[rowValue][column]);
+                break;
+        }
+    }
+
     /**
      * Sets format for panel to be added into the frame
      */
@@ -105,6 +117,16 @@ public class WordleGraphics implements KeyListener {
 
         wordlePanel.setBorder(wordlePanelBorder); //set panel border to wordlePanelBorder
 
+    }
+
+    public void setUserGuess() {
+        for (int i = 0; i < 5; i++) {
+            userGuess[i] = wordleLabels[rowValue][i].getText();
+        }
+    }
+
+    public String[] getUserGuess() {
+        return userGuess;
     }
 
     /**
@@ -143,6 +165,13 @@ public class WordleGraphics implements KeyListener {
         formatWordlePanel();
 
         addLabelsToPanel();
+
+        wordleLabels[0][0].setText("W");
+        wordleLabels[0][1].setText("E");
+        wordleLabels[0][2].setText("A");
+        wordleLabels[0][3].setText("R");
+        wordleLabels[0][4].setText("Y");
+
     }
 
     /**

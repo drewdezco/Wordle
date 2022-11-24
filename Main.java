@@ -15,16 +15,19 @@ public class Main {
 
     private static JFrame wordleFrame = new JFrame("Wordle++");
 
-    //objects of the other classes
-    private static WordleGame wordle = new WordleGame();
+    private static WordleGraphics wordleGraphicUserInterface = new WordleGraphics(wordleFrame);
 
-    public static void main(String[] args) {
+    //objects of the other classes
+    private static WordleGame wordle = new WordleGame(wordleGraphicUserInterface);
+
+
+    public static void main(String[] args) throws InterruptedException {
 
         wordle.fillArrayList(wordsFile);
 
         wordle.setTargetWord();
 
-        WordleGraphics wordleGraphicUserInterface = new WordleGraphics(wordleFrame);
+        System.out.println(wordle.getTargetWord());
 
         wordleGraphicUserInterface.setup();
 
@@ -33,6 +36,9 @@ public class Main {
         wordleFrame.pack(); //display window
 
         wordleFrame.setVisible(true);
+
+
+        wordle.checkColumn();
 
     }
 }
