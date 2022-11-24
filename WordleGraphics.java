@@ -1,8 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /**
  *Julia Barnes
@@ -14,7 +12,7 @@ import java.awt.event.KeyListener;
  * - Display the correct word at the end of the game
  * - If user guessed correctly, save score on scoreboard and display that to the user
  */
-public class WordleGraphics implements KeyListener {
+public class WordleGraphics{
     private int rowValue = 0; //counter to keep track of row value
     private int columnValue = 0; //counter to keep track of column value
     private  JFrame wordleFrame; //empty frame reference
@@ -165,103 +163,28 @@ public class WordleGraphics implements KeyListener {
         formatWordlePanel();
 
         addLabelsToPanel();
-
-        wordleLabels[0][0].setText("W");
-        wordleLabels[0][1].setText("E");
-        wordleLabels[0][2].setText("A");
-        wordleLabels[0][3].setText("R");
-        wordleLabels[0][4].setText("Y");
-
-    }
-
-    /**
-     * Used to test the class, more than likely this will be deleted.
-     * @param args Nothing here
-     */
-
-    public static void main(String[] args) {
-
-        /*
-
-        formatWordleFrame();
-
-        formatWordlePanel();
-
-        addLabelsToPanel();
-
-        WordleGraphics myTest = new WordleGraphics();
-
-        wordleFrame.addKeyListener(myTest);
-
-
-        wordleFrame.pack(); //display window
-
-        wordleFrame.setVisible(true);
-
-         */
-
     }
 
 
-    /**
-     * Empty override method that is unused
-     * @param e the event to be processed
-     */
-    @Override
-    public void keyTyped(KeyEvent e) {
+    public int getColumnValue() {
+        return columnValue;
     }
 
-    /**
-     * Reads keycodes to determine which key is pressed.
-     * Populates GUI with keypressed if A-Z
-     * Removes characters if backspace is pressed
-     * Moves to new row if row is filled
-     * @param e the event to be processed
-     */
-    @Override
-    public void keyPressed(KeyEvent e) {
-        //System.out.println(e.getKeyCode());
-        if (e.getKeyCode() == 8) { // if backspace is pressed
-
-            if (columnValue==5) { //if at the end of the current row
-                columnValue--; //subtract one to end up in correct column
-            }
-            if (wordleLabels[rowValue][columnValue].getText().equals("") && columnValue != 0) { //if column is empty and not the first column in the row
-                columnValue--; //move back one column
-            }
-            if (wordleLabels[rowValue][columnValue].getText().length() > 0) { //if column has something in it
-                setEmptyBoxFormat(wordleLabels[rowValue][columnValue]); //set to empty box format for that indices
-                wordleLabels[rowValue][columnValue].setText(""); //set text to empty
-            }
-        }
-        //System.out.println(e);
-
-        else { //otherwise keypressed is not backspace
-
-            if (columnValue < 5) { //if its columns 0-4
-                if (e.getKeyCode() >= 65 && e.getKeyCode() <= 90) { //get which key is pressed (A-Z || 65-90)
-                    wordleLabels[rowValue][columnValue].setText(Character.toString(Character.toUpperCase(e.getKeyChar()))); //populate label with uppercase version of that key
-                    setUncheckedBoxFormat(wordleLabels[rowValue][columnValue]); //Change format to reflect a letter is in the box
-                    columnValue++;//move forward one column
-                }
-                //System.out.println(columnValue);
-            }
-            if (columnValue == 5 && rowValue != 5) { //if column is at 5
-                if (e.getKeyCode()==10) { //if enter is pressed
-                    //System.out.println("You pressed enter");
-                    rowValue++; //move one row down
-                    columnValue = 0; //move column to first in the row
-                }
-            }
-        }
+    public int getRowValue() {
+        return rowValue;
     }
 
-    /**
-     * Empty override method that is unused
-     * @param e the event to be processed
-     */
-    @Override
-    public void keyReleased(KeyEvent e) {
-
+    public void setColumnValue(int columnValue) {
+        this.columnValue = columnValue;
     }
+
+    public void setRowValue(int rowValue) {
+        this.rowValue = rowValue;
+    }
+
+    public JLabel[][] getWordleLabels() {
+        return wordleLabels;
+    }
+
+
 }

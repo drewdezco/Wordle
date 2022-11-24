@@ -31,14 +31,11 @@ public class Main {
 
         wordleGraphicUserInterface.setup();
 
-        wordleFrame.addKeyListener(wordleGraphicUserInterface);
+        wordleFrame.addKeyListener(wordle);
 
         wordleFrame.pack(); //display window
 
         wordleFrame.setVisible(true);
-
-
-        wordle.checkColumn();
 
     }
 }
