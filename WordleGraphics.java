@@ -191,8 +191,10 @@ public class WordleGraphics implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
+        System.out.println(rowValue + " : " + columnValue);
         //System.out.println(e.getKeyCode());
         if (e.getKeyCode() == 8) { // if backspace is pressed
+
             if (columnValue==5) { //if at the end of the current row
                 columnValue--; //subtract one to end up in correct column
             }
@@ -216,7 +218,7 @@ public class WordleGraphics implements KeyListener {
                 }
                 //System.out.println(columnValue);
             }
-            if (columnValue == 5) { //if column is at 5
+            if (columnValue == 5 && rowValue != 5) { //if column is at 5
                 if (e.getKeyCode()==10) { //if enter is pressed
                     //System.out.println("You pressed enter");
                     rowValue++; //move one row down
