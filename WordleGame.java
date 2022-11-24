@@ -29,8 +29,8 @@ public class WordleGame {
     }
 
     //parameterized constructor
-    public WordleGame(String t) {
-        targetWord = t;
+    public WordleGame(String targetWord) {
+        this.targetWord = targetWord;
     }
 
     /**
@@ -65,11 +65,14 @@ public class WordleGame {
     /**
      * Gets target word from the word list (specific range given in assignment)
      * Usually I would take the size of the arraylist for the random parameter
-     * @param yourList
      * @return String
      */
-    public static String getTargetWord(ArrayList<String> yourList) {
-        return yourList.get(generateNumber(4500));
+    public String getTargetWord() {
+        return fiveLetterWords.get(generateNumber(4500));
+    }
+
+    public void setTargetWord() {
+        targetWord = getTargetWord();
     }
 
 
