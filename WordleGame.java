@@ -5,17 +5,13 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import static java.lang.System.exit;
-import static java.lang.Thread.sleep;
+
 
 /**
  *Julia Barnes
  *Sarah Harrington
  *Andrew Hernandez
- *
  * The purpose of this class is to:
  * - Give a player six guesses to guess a five-letter word that is chosen at random from a list
  * - Check to see if the word guessed is a real five-letter word
@@ -24,27 +20,33 @@ import static java.lang.Thread.sleep;
  */
 public class WordleGame implements KeyListener {
 
-    private ArrayList<String> fiveLetterWords = new ArrayList<>();
+    private final ArrayList<String> fiveLetterWords = new ArrayList<>(); //arraylist for storing five-letter words
 
-    //take in target word as instance field
-    private String targetWord;
 
-    private WordleGraphics wordleGraphics;
+    private String targetWord; //target word chosen at random variable
 
-    //default constructor
+    private WordleGraphics wordleGraphics; //Graphics class to pass into wordle
+
+    /**
+     * Constructor for WordleGame to take in wordle graphics, and set target word to null
+     * @param wordleGraphics Passes in wordle graphics class to set variable in class
+     */
     public WordleGame(WordleGraphics wordleGraphics) {
         targetWord = null;
         this.wordleGraphics = wordleGraphics;
     }
 
-    //parameterized constructor
+    /**
+     * Constructor to take in target word for class testing
+     * @param targetWord Takes in string for target word variable
+     */
     public WordleGame(String targetWord) {
         this.targetWord = targetWord;
     }
 
     /**
      * Generates a random number given a range
-     * @param range
+     * @param range int for determining number range of Math.random
      * @return int
      */
     public static int generateNumber(int range) {
@@ -56,7 +58,6 @@ public class WordleGame implements KeyListener {
      * Initializes file words using word file given
      * Fills arraylist with words from the file
      * Catches file not found exception and returns error message as well as ends program
-     * @throws FileNotFoundException
      */
     public void fillArrayList(File filename) {
         try {
@@ -80,10 +81,17 @@ public class WordleGame implements KeyListener {
         return fiveLetterWords.get(generateNumber(4500));
     }
 
+    /**
+     * Setter method for target word in class
+     */
     public void setTargetWord() {
         targetWord = generateRandomWord();
     }
 
+    /**
+     * Getter method for target word in class
+     * @return targetWord String
+     */
     public String getTargetWord() {
         return targetWord;
     }
@@ -95,34 +103,32 @@ public class WordleGame implements KeyListener {
     public boolean checkValidGuess() { //functional AFAIK
         wordleGraphics.setUserGuess(); //set user input in current row
 
-        String checkArray[] = wordleGraphics.getUserGuess();//set array equal to user guess
+        String[] checkArray = wordleGraphics.getUserGuess();//set array equal to user guess
 
-        String checkInWords = ""; //instantiate empty string
+        StringBuilder checkInWords = new StringBuilder(); //instantiate empty string
 
         for (int i = 0; i < 5; i++) { //input each letter in array
-            checkInWords += checkArray[i];
+            checkInWords.append(checkArray[i]);
         }
 
         //System.out.println(checkInWords);
 
-        if (!fiveLetterWords.contains(checkInWords.toLowerCase())) { //if list of words does not contain input
-            return false;
-        }
-        else { //if it does contain input
-            return true;
-        }
+        return fiveLetterWords.contains(checkInWords.toString().toLowerCase()); //if it contains return true, else false
 
     }
 
-    public void checkColumn() throws InterruptedException {
-        if (checkValidGuess() == true) { //if userguess is a valid input
-            targetWord = "wares";
-            String checkArray[] = wordleGraphics.getUserGuess();//set array equal to user guess
+    /**
+     * Checks if user guess is valid, if it is valid then it creates array to compare user guess with actual target word.
+     * Depending on comparison, formats the column appropriately
+     */
+    public void checkColumn()  {
+        if (checkValidGuess()) { //if user guess is a valid input
+            String[] checkArray = wordleGraphics.getUserGuess();//set array equal to user guess
 
-            String checkInWords = ""; //instantiate empty string
+            StringBuilder checkInWords = new StringBuilder(); //instantiate empty string
 
             for (int i = 0; i < 5; i++) { //input each letter in array
-                checkInWords += checkArray[i];
+                checkInWords.append(checkArray[i]);
             }
 
             for (int i = 0; i < 5; i ++) {
@@ -143,7 +149,7 @@ public class WordleGame implements KeyListener {
             }
         }
         else {
-            //at some point put in message stating to input a five letter word
+            //at some point put in message stating to input a five-letter word
         }
     }
 
@@ -157,7 +163,7 @@ public class WordleGame implements KeyListener {
 
     /**
      * Reads keycodes to determine which key is pressed.
-     * Populates GUI with keypressed if A-Z
+     * Populates GUI with key pressed if A-Z
      * Removes characters if backspace is pressed
      * Moves to new row if row is filled
      * @param e the event to be processed
@@ -180,7 +186,7 @@ public class WordleGame implements KeyListener {
         }
         //System.out.println(e);
 
-        else { //otherwise keypressed is not backspace
+        else { //otherwise key pressed is not backspace
 
             if (wordleGraphics.getColumnValue() < 5) { //if its columns 0-4
                 if (e.getKeyCode() >= 65 && e.getKeyCode() <= 90) { //get which key is pressed (A-Z || 65-90)
@@ -194,12 +200,9 @@ public class WordleGame implements KeyListener {
             if (wordleGraphics.getColumnValue() == 5 && wordleGraphics.getRowValue() != 5) { //if column is at 5
                 if (e.getKeyCode()==10) { //if enter is pressed
                     //System.out.println("You pressed enter");
-                    if (checkValidGuess() == true) {
-                        try {
-                            checkColumn();
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                    if (checkValidGuess()) { //if user guess is a valid guess
+                            checkColumn(); //check current column
+
                         wordleGraphics.setRowValue(wordleGraphics.getRowValue()+1); //move one row down
                         wordleGraphics.setColumnValue(0); //move column to first in the row
                     }
@@ -214,11 +217,7 @@ public class WordleGame implements KeyListener {
             if (wordleGraphics.getColumnValue() == 5 && wordleGraphics.getRowValue() == 5) {
                 if (e.getKeyCode()==10) {
                     if (checkValidGuess() == true) {
-                        try {
                             checkColumn();
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }
 
                         //show scoreboard here
                     }
@@ -240,7 +239,7 @@ public class WordleGame implements KeyListener {
     //method to run through wordle game
     public void playWordle() {
 
-        //call GUI so it is called when the game play is called
+        //call GUI, so it is called when the game play is called
 
         //iterate through 6 times (6 guesses)
 
