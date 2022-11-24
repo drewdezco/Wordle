@@ -191,7 +191,6 @@ public class WordleGraphics implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println(rowValue + " : " + columnValue);
         //System.out.println(e.getKeyCode());
         if (e.getKeyCode() == 8) { // if backspace is pressed
 

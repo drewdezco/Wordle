@@ -1,3 +1,10 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import static java.lang.System.exit;
+
 /**
  *Julia Barnes
  *Sarah Harrington
@@ -11,6 +18,8 @@
  */
 public class WordleGame {
 
+    private ArrayList<String> fiveLetterWords = new ArrayList<>();
+
     //take in target word as instance field
     private String targetWord;
 
@@ -22,6 +31,45 @@ public class WordleGame {
     //parameterized constructor
     public WordleGame(String t) {
         targetWord = t;
+    }
+
+    /**
+     * Generates a random number given a range
+     * @param range
+     * @return int
+     */
+    public static int generateNumber(int range) {
+
+        return (int)(Math.random() * range);
+    }
+
+    /**
+     * Initializes file words using word file given
+     * Fills arraylist with words from the file
+     * Catches file not found exception and returns error message as well as ends program
+     * @throws FileNotFoundException
+     */
+    public void fillArrayList(File filename) {
+        try {
+            Scanner scan = new Scanner(filename);
+            while (scan.hasNext()) {
+                fiveLetterWords.add(scan.next());
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("ERROR: File not found.");
+            exit(0);
+        }
+    }
+
+    /**
+     * Gets target word from the word list (specific range given in assignment)
+     * Usually I would take the size of the arraylist for the random parameter
+     * @param yourList
+     * @return String
+     */
+    public static String getTargetWord(ArrayList<String> yourList) {
+        return yourList.get(generateNumber(4500));
     }
 
 
