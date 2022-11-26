@@ -3,6 +3,14 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
+
+/**
+ * Julia Barnes
+ * Sarah Harrington
+ * Andrew Hernandez
+ *
+ * The purpose of this class is to display a scoreboard for users with the highest scores from a game.
+ */
 public class ScoreboardGraphics {
     private JFrame scoreboardFrame;
     private JPanel scoreGrid = new JPanel(); // inner panel for scores
@@ -15,7 +23,11 @@ public class ScoreboardGraphics {
     private ArrayList<String> highScores;
 
 
-    // constructor
+    /**
+     * Constructor for Scoreboard Graphics
+     * @param scoreboardFrame JFrame for scoreboard to be drawn in
+     * @param highScores Arraylist of Strings, each entry consisting of a name and a score
+     */
     public ScoreboardGraphics(JFrame scoreboardFrame, ArrayList<String> highScores) {
         this.scoreboardFrame = scoreboardFrame;
         this.highScores = highScores;
@@ -23,7 +35,10 @@ public class ScoreboardGraphics {
     }
 
 
-    // format score labels
+    /**
+     * Formats each score label
+     * @param label JLabel to be formatted
+     */
     public void formatScoreLabel(JLabel label) {
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setOpaque(true);
@@ -34,7 +49,9 @@ public class ScoreboardGraphics {
     }
 
 
-    // add labels (scores) to the grid
+    /**
+     * Converts each String into a label and adds it to the grid of high scores
+     */
     public void addLabels() {
         for (String str : highScores) {
             JLabel label = new JLabel(str);
@@ -44,7 +61,9 @@ public class ScoreboardGraphics {
     }
 
 
-    // format Panels
+    /**
+     * Formats each JPanel to have the proper layout, and nests the two Panels together
+     */
     public void formatPanels() {
         scoreLayout.setVgap(5);
         scoreGrid.setLayout(scoreLayout);
@@ -58,14 +77,18 @@ public class ScoreboardGraphics {
     }
 
 
-    // format heading label
+    /**
+     * Formats the heading label's alignment and text size
+     */
     public void formatHeadingLabel() {
         headingLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headingLabel.setFont(new Font(headingLabel.getFont().getName(), headingLabel.getFont().getStyle(), 50));
     }
 
 
-    // format frame for the scoreboard
+    /**
+     * Adds the heading and score labels to the scoreboard JFrame, and formats the JFrame to function properly.
+     */
     public void formatScoreboardFrame() {
         // clear previous items from the frame
         scoreboardFrame.getContentPane().removeAll();
@@ -85,7 +108,9 @@ public class ScoreboardGraphics {
     }
 
 
-    // call functions needed to format frame, labels, and panels
+    /**
+     * Calls the functions necessary to format the frame, labels, and panels needed to display the scoreboard.
+     */
     public void setup() {
         formatScoreboardFrame();
         formatPanels();
