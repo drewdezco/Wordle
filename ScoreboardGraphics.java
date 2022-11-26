@@ -4,57 +4,92 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ScoreboardGraphics {
-    /**
-     * Creates and displays a scoreboard in the window.
-     * @param frame window to draw scoreboard in
-     * @param highScores arraylist of strings
-     */
-    public void renderScoreboard(JFrame frame, ArrayList<String> highScores) {
-        // panel and grid layout for scores
-        JPanel scoreGrid = new JPanel();
-        GridLayout scoreLayout = new GridLayout(highScores.size(),1);
+    private JFrame scoreboardFrame;
+    private JPanel scoreGrid = new JPanel(); // inner panel for scores
+    private JPanel scoreBoardGrid = new JPanel(); // outer panel to allow for empty border around scoreGrid
+    private GridLayout scoreLayout; // layout for scoreGrid
+    private GridLayout scoreBoardLayout = new GridLayout(1, 1); // layout for scoreBoardGrid
+
+    JLabel headingLabel = new JLabel("Scoreboard");
+
+    private ArrayList<String> highScores;
+
+
+    // constructor
+    public ScoreboardGraphics(JFrame scoreboardFrame, ArrayList<String> highScores) {
+        this.scoreboardFrame = scoreboardFrame;
+        this.highScores = highScores;
+        this.scoreLayout = new GridLayout(highScores.size(), 1);
+    }
+
+
+    // format score labels
+    public void formatScoreLabel(JLabel label) {
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setOpaque(true);
+        label.setBackground(new Color(108, 171, 59, 255));
+        label.setForeground(Color.white);
+        label.setBorder(new LineBorder(new Color(54, 86, 29, 255)));
+        label.setFont(new Font(label.getFont().getName(), label.getFont().getStyle(), 25));
+    }
+
+
+    // add labels (scores) to the grid
+    public void addLabels() {
+        for (String str : highScores) {
+            JLabel label = new JLabel(str);
+            formatScoreLabel(label);
+            scoreGrid.add(label);
+        }
+    }
+
+
+    // format Panels
+    public void formatPanels() {
         scoreLayout.setVgap(5);
         scoreGrid.setLayout(scoreLayout);
 
-        // add each high score to the grid
-        for (String str : highScores) {
-            JLabel label = new JLabel(str);
-            // format label
-            label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setOpaque(true);
-            label.setBackground(new Color(108, 171, 59, 255));
-            label.setForeground(Color.white);
-            label.setBorder(new LineBorder(new Color(54, 86, 29, 255)));
-            label.setFont(new Font(label.getFont().getName(), label.getFont().getStyle(), 25));
-            scoreGrid.add(label);
-        }
-
-        // create and format panel to allow for outside empty border
-        JPanel scoreBoardGrid = new JPanel();
-        GridLayout scoreBoardLayout = new GridLayout(1,1);
         scoreBoardLayout.setHgap(5);
         scoreBoardGrid.setLayout(scoreBoardLayout);
-        scoreBoardGrid.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        scoreBoardGrid.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
+        // nest the two panels
         scoreBoardGrid.add(scoreGrid);
+    }
 
-        // vertical box layout for heading and scoreboard
-        BoxLayout mainLayout = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);
-        frame.getContentPane().setLayout(mainLayout);
 
-        // add and format heading label
-        JLabel headingLabel = new JLabel("Scoreboard");
+    // format heading label
+    public void formatHeadingLabel() {
         headingLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headingLabel.setFont(new Font(headingLabel.getFont().getName(), headingLabel.getFont().getStyle(), 50));
+    }
 
-        // clear game components from window, then add heading and scoreboard
-        frame.getContentPane().removeAll();
-        frame.getContentPane().add(headingLabel);
-        frame.getContentPane().add(scoreBoardGrid);
 
-        // display window
-        frame.setMinimumSize(new Dimension(500,400));
-        frame.setVisible(true);
+    // format frame for the scoreboard
+    public void formatScoreboardFrame() {
+        // clear previous items from the frame
+        scoreboardFrame.getContentPane().removeAll();
 
+        // add vertical box layout for frame
+        BoxLayout mainLayout = new BoxLayout(scoreboardFrame.getContentPane(), BoxLayout.Y_AXIS);
+        scoreboardFrame.getContentPane().setLayout(mainLayout);
+
+        // add scoreboard content
+        scoreboardFrame.getContentPane().add(headingLabel);
+        scoreboardFrame.getContentPane().add(scoreBoardGrid);
+
+        // format frame
+        scoreboardFrame.setMinimumSize(new Dimension(500, 400));
+        scoreboardFrame.setVisible(true);
+        scoreboardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+
+    // call functions needed to format frame, labels, and panels
+    public void setup() {
+        formatScoreboardFrame();
+        formatPanels();
+        addLabels();
+        formatHeadingLabel();
     }
 }
