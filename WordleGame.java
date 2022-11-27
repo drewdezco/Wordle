@@ -149,7 +149,9 @@ public class WordleGame implements KeyListener {
             }
         }
         else {
-            //at some point put in message stating to input a five-letter word
+            // message stating to input a five-letter word
+            // this line is never reached, because this method is only called when the guess is valid
+            wordleGraphics.displayInvalidMessage();
         }
     }
 
@@ -207,7 +209,8 @@ public class WordleGame implements KeyListener {
                         wordleGraphics.setColumnValue(0); //move column to first in the row
                     }
                     else {
-                        //eventually display message stating to put in correct input
+                        // display message stating to put in correct input
+                        wordleGraphics.displayInvalidMessage();
                         System.out.println("Input correct message");
                     }
 
