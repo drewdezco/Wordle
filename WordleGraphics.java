@@ -186,5 +186,11 @@ public class WordleGraphics{
         return wordleLabels;
     }
 
-
+    /**
+     * Displays simple popup message telling user to enter a valid guess
+     */
+    public void displayInvalidMessage() {
+        String message = "Please enter a valid five-letter word";
+        JOptionPane.showMessageDialog(null, message);
+    }
 }
