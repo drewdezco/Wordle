@@ -22,7 +22,7 @@ public class WordleGame implements KeyListener {
 
     private final ArrayList<String> fiveLetterWords = new ArrayList<>(); //arraylist for storing five-letter words
 
-
+    private static int turnCounter = 1;
     private String targetWord; //target word chosen at random variable
 
     private WordleGraphics wordleGraphics; //Graphics class to pass into wordle
@@ -131,7 +131,14 @@ public class WordleGame implements KeyListener {
                 checkInWords.append(checkArray[i]);
             }
 
+            if(targetWord.equalsIgnoreCase(String.valueOf(checkInWords))) { //if target word is equal to user guess
+                System.out.println("You guessed the correct word in " + turnCounter + " guesses!");
+                System.exit(0); //for now, program ends on guessing correct word
+                //eventually replace this print statement with call to scoreboard
+            }
+
             for (int i = 0; i < 5; i ++) {
+
                 //System.out.print(checkArray[i] + " " + targetWord.charAt(i));
                 if (Character.toString(targetWord.charAt(i)).equalsIgnoreCase(checkArray[i])) {
                     //System.out.print(": Equals!\n");
@@ -147,6 +154,7 @@ public class WordleGame implements KeyListener {
                     wordleGraphics.setColumnFormat(3, i);//format as incorrect letter incorrect spot
                 }
             }
+            turnCounter++; //adds to turn counter after checking column successfully
         }
         else {
             // message stating to input a five-letter word
@@ -211,7 +219,7 @@ public class WordleGame implements KeyListener {
                     else {
                         // display message stating to put in correct input
                         wordleGraphics.displayInvalidMessage();
-                        System.out.println("Input correct message");
+                        //System.out.println("Input correct message");
                     }
 
                 }
