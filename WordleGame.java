@@ -24,6 +24,7 @@ public class WordleGame implements KeyListener {
 
     private final ArrayList<String> fiveLetterWords = new ArrayList<>(); //arraylist for storing five-letter words
 
+
     private String targetWord; //target word chosen at random variable
 
     private WordleGraphics wordleGraphics; //Graphics class to pass into wordle
@@ -119,6 +120,7 @@ public class WordleGame implements KeyListener {
         //System.out.println(checkInWords);
 
         return fiveLetterWords.contains(checkInWords.toString().toLowerCase()); //if it contains return true, else false
+
     }
 
     /**
@@ -157,8 +159,7 @@ public class WordleGame implements KeyListener {
             }
         }
         else {
-            //message stating to input a five-letter word
-            System.out.println("Please input a 5 letter word.");
+            //at some point put in message stating to input a five-letter word
         }
 
         calculateScore(countGuesses);
@@ -230,7 +231,7 @@ public class WordleGame implements KeyListener {
                     if (checkValidGuess() == true) {
                             checkColumn();
 
-                        //TODO show scoreboard here
+                        //show scoreboard here
                     }
                 }
             }
@@ -253,31 +254,16 @@ public class WordleGame implements KeyListener {
     public Integer calculateScore(int i){
         Integer score = 0;
 
-        if(i == 1){
-            score = 10;
-        }else if(i == 2){
-            score = 8;
-        }else if(i ==3){
-            score = 6;
-        }else if(i == 4){
-            score = 4;
-        }else if(i == 5){
-            score = 2;
-        }else if(i == 6){
-            score = 0;
-        }else{
-            score = 0;
-        }
+        //compare guess word to target word
 
-        return score;
-    }
-}
+        //return correct letters
 
-class test2{
-    private static WordleGame wg = new WordleGame("tests");
+        //return letters in the target but in the incorrect spot
 
-    public static void main(String[] args){
-        wg.checkValidGuess();
+        //return incorrect letters
+
+        //handle guesses of incorrect length, do not count as a guess
+
     }
 
 }
