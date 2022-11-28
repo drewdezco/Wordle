@@ -1,8 +1,10 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -22,10 +24,13 @@ public class WordleGame implements KeyListener {
 
     private final ArrayList<String> fiveLetterWords = new ArrayList<>(); //arraylist for storing five-letter words
 
-
     private String targetWord; //target word chosen at random variable
 
     private WordleGraphics wordleGraphics; //Graphics class to pass into wordle
+
+    private static ArrayList<String> words = new ArrayList<String>();
+
+    private static String addWord;
 
     /**
      * Constructor for WordleGame to take in wordle graphics, and set target word to null
@@ -45,7 +50,7 @@ public class WordleGame implements KeyListener {
     }
 
     /**
-     * Generates a random number given a range
+     * Generates a random number given a range to use for pulling a random word
      * @param range int for determining number range of Math.random
      * @return int
      */
@@ -114,7 +119,6 @@ public class WordleGame implements KeyListener {
         //System.out.println(checkInWords);
 
         return fiveLetterWords.contains(checkInWords.toString().toLowerCase()); //if it contains return true, else false
-
     }
 
     /**
@@ -122,6 +126,8 @@ public class WordleGame implements KeyListener {
      * Depending on comparison, formats the column appropriately
      */
     public void checkColumn()  {
+        int countGuesses = 0;
+
         if (checkValidGuess()) { //if user guess is a valid input
             String[] checkArray = wordleGraphics.getUserGuess();//set array equal to user guess
 
@@ -145,12 +151,17 @@ public class WordleGame implements KeyListener {
                 else {
                     //System.out.print(": Not here period!!\n");
                     wordleGraphics.setColumnFormat(3, i);//format as incorrect letter incorrect spot
+
+                countGuesses++;
                 }
             }
         }
         else {
-            //at some point put in message stating to input a five-letter word
+            //message stating to input a five-letter word
+            System.out.println("Please input a 5 letter word.");
         }
+
+        calculateScore(countGuesses);
     }
 
     /**
@@ -219,7 +230,7 @@ public class WordleGame implements KeyListener {
                     if (checkValidGuess() == true) {
                             checkColumn();
 
-                        //show scoreboard here
+                        //TODO show scoreboard here
                     }
                 }
             }
@@ -235,26 +246,38 @@ public class WordleGame implements KeyListener {
 
     }
 
+    /**
+     * Method to return the number of guesses the user makes
+     * @return the number of points the user scored
+     */
+    public Integer calculateScore(int i){
+        Integer score = 0;
 
-    //method to run through wordle game
-    public void playWordle() {
+        if(i == 1){
+            score = 10;
+        }else if(i == 2){
+            score = 8;
+        }else if(i ==3){
+            score = 6;
+        }else if(i == 4){
+            score = 4;
+        }else if(i == 5){
+            score = 2;
+        }else if(i == 6){
+            score = 0;
+        }else{
+            score = 0;
+        }
 
-        //call GUI, so it is called when the game play is called
+        return score;
+    }
+}
 
-        //iterate through 6 times (6 guesses)
+class test2{
+    private static WordleGame wg = new WordleGame("tests");
 
-        //take in user input as guess word
-
-        //compare guess word to target word
-
-        //return correct letters
-
-        //return letters in the target but in the incorrect spot
-
-        //return incorrect letters
-
-        //handle guesses of incorrect length, do not count as a guess
-
+    public static void main(String[] args){
+        wg.checkValidGuess();
     }
 
 }

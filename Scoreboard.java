@@ -1,7 +1,5 @@
-import javax.swing.*;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
 /**
  *Julia Barnes
@@ -15,68 +13,127 @@ import java.util.ArrayList;
  * - Save changes to file
  */
 public class Scoreboard {
-    //instances of the data from wordle to be used by the GUI
-    private String targetWord;
-    private ArrayList<String> guesses = new ArrayList<>();
 
-    //method to control the window
+    private Integer score;
 
-    //method to control the text box
+    private HashMap<String, Integer> scoreboardMap = new HashMap<>();
 
-    //method to control the button(s)
+    private String scoreboardPath;
+
+    private File scoreboardFile;
+
+    private Scanner scan;
+
+    private HashMap<String, Integer> dataMap = new HashMap<>();
 
     /**
-     * Creates and displays a scoreboard in the window.
-     * @param frame window to draw scoreboard in
-     * @param highScores arraylist of strings
+     * Constructor that instantiates the path for the scoreboard file
      */
-    public void renderScoreboard(JFrame frame, ArrayList<String> highScores) {
-        // panel and grid layout for scores
-        JPanel scoreGrid = new JPanel();
-        GridLayout scoreLayout = new GridLayout(highScores.size(),1);
-        scoreLayout.setVgap(5);
-        scoreGrid.setLayout(scoreLayout);
+    public void Scoreboard(){
+      scoreboardPath = "/home/sarah/IdeaProjects/Project-Four/highscores.txt";
+    }
 
-        // add each high score to the grid
-        for (String str : highScores) {
-            JLabel label = new JLabel(str);
-            // format label
-            label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setOpaque(true);
-            label.setBackground(new Color(108, 171, 59, 255));
-            label.setForeground(Color.white);
-            label.setBorder(new LineBorder(new Color(54, 86, 29, 255)));
-            label.setFont(new Font(label.getFont().getName(), label.getFont().getStyle(), 25));
-            scoreGrid.add(label);
+    /**
+     * Constructor that instantiates the score value
+     * @param i score Integer passed from WordleGame after a player finishes the game
+     */
+    public void Scoreboard(Integer i){
+        score = i;
+    }
+
+    //create a scoreboard file if one does not exist
+    public void createScoreboard(){
+        scoreboardFile = new File(scoreboardPath);
+
+        boolean check = scoreboardFile.exists();
+
+        try {
+            if (!check) {
+                scoreboardFile.createNewFile();
+                //System.out.println("Scoreboard file created.");
+            }
+        }catch (IOException e){
+            System.out.println("Error creating scoreboard file.");
         }
+    }
 
-        // create and format panel to allow for outside empty border
-        JPanel scoreBoardGrid = new JPanel();
-        GridLayout scoreBoardLayout = new GridLayout(1,1);
-        scoreBoardLayout.setHgap(5);
-        scoreBoardGrid.setLayout(scoreBoardLayout);
-        scoreBoardGrid.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+    //read in the file data
+    public void readScoreboard(){
+        String line;
 
-        scoreBoardGrid.add(scoreGrid);
+        try {
+            scan = new Scanner(scoreboardFile);
 
-        // vertical box layout for heading and scoreboard
-        BoxLayout mainLayout = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);
-        frame.getContentPane().setLayout(mainLayout);
+            while (scan.hasNext()) {
+                line = scan.nextLine();
+                //System.out.println(line);
 
-        // add and format heading label
-        JLabel headingLabel = new JLabel("Scoreboard");
-        headingLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        headingLabel.setFont(new Font(headingLabel.getFont().getName(), headingLabel.getFont().getStyle(), 50));
+                String[] temp = line.split(" ");
+                //System.out.println(temp[0] + " " + temp[1]);
 
-        // clear game components from window, then add heading and scoreboard
-        frame.getContentPane().removeAll();
-        frame.getContentPane().add(headingLabel);
-        frame.getContentPane().add(scoreBoardGrid);
+                dataMap.put(temp[0], Integer.valueOf(temp[1]));
+            }
+        }catch (IOException e){
+            System.out.println("Error in reading scoreboard file.");
+        }
+    }
 
-        // display window
-        frame.setMinimumSize(new Dimension(500,400));
-        frame.setVisible(true);
+    //sort the scoreboard
+    public void sortScores(int n){
+        // make an arraylist to store our winning players in
+        ArrayList<String> topKeys = new ArrayList<>();
+        // make temp of hash map ( so we can delete elements as we pull highest )
+        HashMap<String, Integer> temp = dataMap;
+        // for the top x scores
+        for(int i = 0; i < n; i++){
+            Integer highestValue = 0;
+            String highestKey = "";
+
+            // go through all, find top score and remove it from map
+            for(String s: temp.keySet()){
+                if(temp.get(s) > highestValue){
+                    highestValue = temp.get(s);
+                    highestKey = s;
+                }
+            }
+            topKeys.add(highestKey);
+            temp.remove(highestKey);
+        }
+        for(String s: topKeys){
+            System.out.println("Key: " + s);
+        }
+    }
+
+    //print the keys and values of the hash map
+    public void printMap(){
+        for (String s : dataMap.keySet());
+    }
+
+    //write new high scores in
+    public void addHighScore(){
+        //check current score against existing sorted scores
+
+        //if current score > scores in the scoreboard, add it to the map and sort again
+        //else return top scores and players score
 
     }
+
+    //update scoreboard and save to hash map for writing to file
+    public void updateScoreboard(){
+
+    }
+}
+
+class tester{
+
+    private static Scoreboard sc = new Scoreboard();
+
+    public static void main(String[] args){
+        sc.Scoreboard();
+        sc.createScoreboard();
+        sc.readScoreboard();
+        sc.sortScores(3);
+    }
+
 
 }

@@ -11,12 +11,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Wordle {
+public class SarahTextBasedWordle {
     private static ArrayList<String> words = new ArrayList<String>();
     private static String addWord;
     private static String targetWord;
 
-    public Wordle(){
+    public SarahTextBasedWordle(){
         targetWord = null;
         addWord = null;
     }
