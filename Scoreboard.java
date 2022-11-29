@@ -30,7 +30,7 @@ public class Scoreboard {
      * Constructor that instantiates the path for the scoreboard file
      */
     public void Scoreboard(){
-      scoreboardPath = "/home/sarah/IdeaProjects/Project-Four/highscores.txt";
+      scoreboardPath = System.getProperty("user.dir") + "/highscores.txt";
     }
 
     /**
