@@ -19,6 +19,7 @@ public class Main {
 
     //objects of the other classes
     private static WordleGame wordle = new WordleGame(wordleGraphicUserInterface);
+    private static Scoreboard sb = new Scoreboard();
 
 
     public static void main(String[] args) throws InterruptedException {

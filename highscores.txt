@@ -1,5 +1,0 @@
-sar 20
-byrce 5
-elles 10
-pidge 15
-clyde 8

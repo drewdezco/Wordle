@@ -22,11 +22,13 @@ public class WordleGame implements KeyListener {
 
     private final ArrayList<String> fiveLetterWords = new ArrayList<>(); //arraylist for storing five-letter words
 
-
     private static int turnCounter = 1;
+
     private String targetWord; //target word chosen at random variable
 
     private WordleGraphics wordleGraphics; //Graphics class to pass into wordle
+
+    private Scoreboard sb;
 
     /**
      * Constructor for WordleGame to take in wordle graphics, and set target word to null
@@ -123,6 +125,7 @@ public class WordleGame implements KeyListener {
      * Depending on comparison, formats the column appropriately
      */
     public void checkColumn()  {
+
         if (checkValidGuess()) { //if user guess is a valid input
             String[] checkArray = wordleGraphics.getUserGuess();//set array equal to user guess
 
@@ -162,6 +165,8 @@ public class WordleGame implements KeyListener {
             // this line is never reached, because this method is only called when the guess is valid
             wordleGraphics.displayInvalidMessage();
         }
+        //pass the number of guesses to Scoreboard to calculate score
+        sb.Scoreboard(turnCounter);
     }
 
     /**
@@ -233,6 +238,7 @@ public class WordleGame implements KeyListener {
                         checkColumn();
 
                         //show scoreboard here
+                        sb.masterScoreboard();
                     }
                 }
             }
@@ -247,27 +253,4 @@ public class WordleGame implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
-
-
-    //method to run through wordle game
-    public void playWordle() {
-
-        //call GUI, so it is called when the game play is called
-
-        //iterate through 6 times (6 guesses)
-
-        //take in user input as guess word
-
-        //compare guess word to target word
-
-        //return correct letters
-
-        //return letters in the target but in the incorrect spot
-
-        //return incorrect letters
-
-        //handle guesses of incorrect length, do not count as a guess
-
-    }
-
 }
