@@ -166,7 +166,7 @@ public class WordleGame implements KeyListener {
             wordleGraphics.displayInvalidMessage();
         }
         //pass the number of guesses to Scoreboard to calculate score
-        sb.Scoreboard(turnCounter);
+        sb = new Scoreboard(turnCounter);
     }
 
     /**
