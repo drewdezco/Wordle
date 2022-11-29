@@ -36,7 +36,7 @@ public class Scoreboard {
      * Default constructor that instantiates the number of guesses to 6
      * This will return a 0 (null) score in calculateScore
      */
-    public void Scoreboard(){
+    public Scoreboard(){
         guesses = 6;
     }
 
@@ -45,7 +45,7 @@ public class Scoreboard {
      * Parameterized constructor that instantiates the number of guesses
      * @param i score Integer passed from WordleGame after a player finishes the game
      */
-    public void Scoreboard(int i){
+    public Scoreboard(int i){
         guesses = i;
     }
 
@@ -135,6 +135,12 @@ public class Scoreboard {
 
         // make updatedMap of hash map ( so we can delete elements as we pull highest )
         updatedMap = new HashMap<>(dataMap);
+
+        // avoid attempting to add more scores to the arraylist than are actually stored
+        if (n > dataMap.size()) {
+            // stop once we get to the last score in dataMap
+            n = dataMap.size();
+        }
 
         // for the top x scores
         for(int i = 0; i < n; i++){
@@ -250,6 +256,7 @@ public class Scoreboard {
         JFrame scoreboardFrame = new JFrame("Scoreboard");
 
         ScoreboardGraphics sg = new ScoreboardGraphics(scoreboardFrame, mapList);
+        sg.setup();
     }
 
 
@@ -273,11 +280,11 @@ public class Scoreboard {
 
 class tester{
 
-    private static Scoreboard sc = new Scoreboard();
+    private static Scoreboard sc;
 
     public static void main(String[] args){
 
-        sc.Scoreboard(1);
+        sc = new Scoreboard(1);
 
         sc.createScoreboard();
 
