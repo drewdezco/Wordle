@@ -117,4 +117,17 @@ public class ScoreboardGraphics {
         addLabels();
         formatHeadingLabel();
     }
+
+
+    /**
+     * Displays a popup message to the user asking for their name, and returns the entered text.
+     * @return String user's name
+     */
+    public String getUserName() {
+        /* note that this may return null if user exits the popup or presses the cancel button, and will return an
+           empty string if user presses ok without typing anything
+         */
+        String name = JOptionPane.showInputDialog("Please enter a name to be saved with your score:");
+        return name;
+    }
 }
