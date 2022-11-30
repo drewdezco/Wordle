@@ -33,10 +33,12 @@ public class WordleGame implements KeyListener {
     /**
      * Constructor for WordleGame to take in wordle graphics, and set target word to null
      * @param wordleGraphics Passes in wordle graphics class to set variable in class
+     * @param sb instance of Scoreboard class
      */
-    public WordleGame(WordleGraphics wordleGraphics) {
+    public WordleGame(WordleGraphics wordleGraphics, Scoreboard sb) {
         targetWord = null;
         this.wordleGraphics = wordleGraphics;
+        this.sb = sb;
     }
 
     /**
@@ -137,8 +139,9 @@ public class WordleGame implements KeyListener {
 
             if(targetWord.equalsIgnoreCase(String.valueOf(checkInWords))) { //if target word is equal to user guess
                 System.out.println("You guessed the correct word in " + turnCounter + " guesses!");
-                System.exit(0); //for now, program ends on guessing correct word
-                //eventually replace this print statement with call to scoreboard
+                // load the scoreboard
+                sb.setGuesses(turnCounter);
+                sb.masterScoreboard();
             }
 
             for (int i = 0; i < 5; i ++) {
@@ -165,8 +168,6 @@ public class WordleGame implements KeyListener {
             // this line is never reached, because this method is only called when the guess is valid
             wordleGraphics.displayInvalidMessage();
         }
-        //pass the number of guesses to Scoreboard to calculate score
-        sb.Scoreboard(turnCounter);
     }
 
     /**
@@ -238,6 +239,7 @@ public class WordleGame implements KeyListener {
                         checkColumn();
 
                         //show scoreboard here
+                        sb.setGuesses(turnCounter);
                         sb.masterScoreboard();
                     }
                 }

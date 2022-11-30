@@ -18,8 +18,8 @@ public class Main {
     private static WordleGraphics wordleGraphicUserInterface = new WordleGraphics(wordleFrame);
 
     //objects of the other classes
-    private static WordleGame wordle = new WordleGame(wordleGraphicUserInterface);
-    private static Scoreboard sb = new Scoreboard();
+    private static Scoreboard sb = new Scoreboard(wordleFrame);
+    private static WordleGame wordle = new WordleGame(wordleGraphicUserInterface, sb);
 
 
     public static void main(String[] args) throws InterruptedException {
