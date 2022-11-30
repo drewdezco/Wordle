@@ -1,7 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 
@@ -51,13 +50,22 @@ public class ScoreboardGraphics {
 
 
     /**
-     * Converts each String into a label and adds it to the grid of high scores
+     * Converts each String into a label and adds it to the grid of high scores. If there are no saved scores, creates
+     * a label with a message indicating that.
      */
     public void addLabels() {
-        for (String str : highScores) {
-            JLabel label = new JLabel(str);
+        if (highScores.size() == 0) {
+            // no scores saved, create label to indicate
+            JLabel label = new JLabel("No scores yet!");
             formatScoreLabel(label);
             scoreGrid.add(label);
+        } else {
+            // create label for each saved score
+            for (String str : highScores) {
+                JLabel label = new JLabel(str);
+                formatScoreLabel(label);
+                scoreGrid.add(label);
+            }
         }
     }
 
@@ -122,9 +130,10 @@ public class ScoreboardGraphics {
 
     /**
      * Displays a popup message to the user asking for their name, and returns the entered text.
-     * @return String user's name
+     * @return String user's name. May return null if user exits the popup window or presses the cancel button. Will
+     * return empty string if user presses ok without typing anything.
      */
-    public String getUserName() {
+    public static String getUserName() {
         /* note that this may return null if user exits the popup or presses the cancel button, and will return an
            empty string if user presses ok without typing anything
          */

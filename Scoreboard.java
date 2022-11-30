@@ -1,6 +1,10 @@
-import java.io.*;
-import java.util.*;
 import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  *Julia Barnes
@@ -18,7 +22,7 @@ public class Scoreboard {
     private int guesses;
 
     private Integer score;
-    
+
     private String scoreboardPath = System.getProperty("user.dir") + "/highscores.txt";
 
     private File scoreboardFile;
@@ -31,22 +35,26 @@ public class Scoreboard {
 
     private ArrayList<String> topKeys;
 
+    private JFrame frame;
+
+    private final int maxHighScores = 3;
+
 
     /**
-     * Default constructor that instantiates the number of guesses to 6
-     * This will return a 0 (null) score in calculateScore
+     * Constructor that instantiates the frame.
+     * @param frame JFrame reference to be passed to ScoreboardGraphics
      */
-    public Scoreboard(){
-        guesses = 6;
+    public Scoreboard(JFrame frame){
+        this.frame = frame;
     }
 
 
     /**
-     * Parameterized constructor that instantiates the number of guesses
-     * @param i score Integer passed from WordleGame after a player finishes the game
+     * Sets the number of guesses the user took
+     * @param numGuesses number of guesses
      */
-    public Scoreboard(int i){
-        guesses = i;
+    public void setGuesses(int numGuesses) {
+        guesses = numGuesses;
     }
 
 
@@ -166,7 +174,6 @@ public class Scoreboard {
      * If it is, add it to the dataMap and re-sort
      */
     public void addHighScore(){
-        Scanner scanName = new Scanner(System.in);
 
         //call the users score
         calculateScore();
@@ -176,28 +183,34 @@ public class Scoreboard {
             //boolean check to save if the users score belongs on the scoreboard
             boolean checkScore = false;
 
+            // if no scores are stored, automatically add new score
+            if (dataMap.isEmpty()) {
+                checkScore = true;
+            }
+
             //loop through the sorted hash map of high scores
             for (String s : dataMap.keySet()) {
-                //if the users score is higher than the scores in the scoreboard
-                if (score > dataMap.get(s)) {
-                   checkScore = true;
+                //if the users score is higher than the scores in the scoreboard, or we have less than the max number of scores stored
+                if (score > dataMap.get(s) || dataMap.size() < maxHighScores) {
+                    checkScore = true;
                 }
             }
 
             //if the users score belongs on the scoreboard, take in their name to add
             if(checkScore){
                 //take in user input for their name
-                System.out.println("Input a name for the scoreboard: ");
-                String name = scanName.nextLine();
+                String name = ScoreboardGraphics.getUserName();
 
                 //check if the name is already used as a key, if so have the user input a new name
-                while(dataMap.containsKey(name)){
+                while (dataMap.containsKey(name)) {
                     System.out.println("Input name is taken. Please input a different name: ");
-                    name = scanName.nextLine();
+                    name = ScoreboardGraphics.getUserName();
                 }
 
-                //add the new high score to the scoreboard hash map
-                dataMap.put(name, score);
+                // only add the score to the scoreboard hash map if the user actually entered a name
+                if (name != null && !name.equals("")) {
+                    dataMap.put(name, score);
+                }
             }
 
             //re-sort the score with the new score added
@@ -248,14 +261,14 @@ public class Scoreboard {
     public void sendToGUI(){
 
         ArrayList<String> mapList = new ArrayList<>();
-        
-        for (String s: dataMap.keySet()){
-            mapList.add(s + " " + dataMap.get(s));
+
+        // add sorted scores to arraylist
+        for (String s : topKeys) {
+            mapList.add(s + " : " + dataMap.get(s));
         }
 
-        JFrame scoreboardFrame = new JFrame("Scoreboard");
-
-        ScoreboardGraphics sg = new ScoreboardGraphics(scoreboardFrame, mapList);
+        // create and load the scoreboard GUI
+        ScoreboardGraphics sg = new ScoreboardGraphics(frame, mapList);
         sg.setup();
     }
 
@@ -284,7 +297,9 @@ class tester{
 
     public static void main(String[] args){
 
-        sc = new Scoreboard(1);
+        JFrame frame = new JFrame("Testing Scoreboard");
+        sc = new Scoreboard(frame);
+        sc.setGuesses(1);
 
         sc.createScoreboard();
 
