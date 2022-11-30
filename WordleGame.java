@@ -28,7 +28,7 @@ public class WordleGame implements KeyListener {
 
     private WordleGraphics wordleGraphics; //Graphics class to pass into wordle
 
-    private Scoreboard sb;
+    private Scoreboard sb = new Scoreboard();
 
     /**
      * Constructor for WordleGame to take in wordle graphics, and set target word to null

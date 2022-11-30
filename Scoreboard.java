@@ -91,6 +91,10 @@ public class Scoreboard {
 
                 dataMap.put(dataArray[0], Integer.valueOf(dataArray[1]));
             }
+
+            //add a default player score to the scoreboard to start
+            dataMap.put("Player 1", Integer.valueOf(2));
+
         }catch (IOException e){
             System.out.println("Error in reading scoreboard file.");
         }
@@ -268,31 +272,3 @@ public class Scoreboard {
 }
 
 
-
-
-
-class tester{
-
-    private static Scoreboard sc = new Scoreboard();
-
-    public static void main(String[] args){
-
-        sc.Scoreboard(1);
-
-        sc.createScoreboard();
-
-        sc.readScoreboard();
-
-        sc.calculateScore();
-
-        sc.addHighScore();
-
-        sc.updateScoreboard();
-
-
-
-
-
-        //sc.masterScoreboard();
-    }
-}

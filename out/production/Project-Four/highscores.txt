@@ -1,3 +1,0 @@
-Julia 10
-Ian 10
-Sar 8
