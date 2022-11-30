@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
@@ -16,7 +18,7 @@ public class ScoreboardGraphics {
     private JPanel scoreGrid = new JPanel(); // inner panel for scores
     private JPanel scoreBoardGrid = new JPanel(); // outer panel to allow for empty border around scoreGrid
     private GridLayout scoreLayout; // layout for scoreGrid
-    private GridLayout scoreBoardLayout = new GridLayout(1, 1); // layout for scoreBoardGrid
+    private GridLayout scoreBoardLayout = new GridLayout(2, 1); // layout for scoreBoardGrid
 
     JLabel headingLabel = new JLabel("Scoreboard");
 
@@ -83,6 +85,8 @@ public class ScoreboardGraphics {
 
         // nest the two panels
         scoreBoardGrid.add(scoreGrid);
+        // add button to restart gameplay
+        addPlayAgainButton();
     }
 
 
@@ -139,5 +143,12 @@ public class ScoreboardGraphics {
          */
         String name = JOptionPane.showInputDialog("Please enter a name to be saved with your score:");
         return name;
+    }
+
+    public void addPlayAgainButton() {
+        // add button object
+        JButton playButton = new JButton("Play again");
+        playButton.addActionListener(new ButtonListener(scoreboardFrame));
+        scoreBoardGrid.add(playButton);
     }
 }

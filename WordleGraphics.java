@@ -193,4 +193,12 @@ public class WordleGraphics{
         String message = "Please enter a valid five-letter word";
         JOptionPane.showMessageDialog(null, message);
     }
+
+
+    /**
+     * Removes all labels from wordlePanel.
+     */
+    public void reset() {
+        wordlePanel.removeAll();
+    }
 }

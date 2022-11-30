@@ -22,13 +22,14 @@ public class Main {
     private static WordleGame wordle = new WordleGame(wordleGraphicUserInterface, sb);
 
 
-    public static void main(String[] args) throws InterruptedException {
-
-        wordle.fillArrayList(wordsFile);
-
+    public static void playGame() {
         wordle.setTargetWord();
 
         System.out.println(wordle.getTargetWord());
+
+        // clear anything previously displayed in frame & reset wordleGUI
+        wordleFrame.getContentPane().removeAll();
+        wordleGraphicUserInterface.reset();
 
         wordleGraphicUserInterface.setup();
 
@@ -38,5 +39,14 @@ public class Main {
 
         wordleFrame.setVisible(true);
 
+        //System.out.println(wordleGraphicUserInterface.askUserPlayAgain());
+    }
+
+
+    public static void main(String[] args) {
+
+        wordle.fillArrayList(wordsFile);
+
+        playGame();
     }
 }
