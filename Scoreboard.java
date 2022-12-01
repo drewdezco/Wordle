@@ -224,7 +224,7 @@ public class Scoreboard {
             //re-sort the score with the new score added
             sortScores(3);
             for(String s : dataMap.keySet()){
-                System.out.println("Sorted map in addScore: " + s + " " + dataMap.get(s));
+                //System.out.println("Sorted map in addScore: " + s + " " + dataMap.get(s));
             }
 
         }catch (NullPointerException npe){
