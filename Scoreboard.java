@@ -8,15 +8,16 @@ import java.util.Scanner;
 
 
 /**
- *Julia Barnes
- *Sarah Harrington
- *Andrew Hernandez
  *
  * The purpose of this class is to:
  * - Create a new scoreboard text file if one does not exist
  * - Read current high scores in file
  * - Write a new high score in with the correct position in the file
  * - Save changes to file
+ *
+ * @author Julia Barnes
+ * @author Sarah Harrington
+ * @author Andrew Hernandez
  */
 
 public class Scoreboard {
@@ -41,7 +42,7 @@ public class Scoreboard {
 
     private final int maxHighScores = 3;
 
-    String targetWord;
+    private String targetWord;
 
     /**
      * Constructor that instantiates the frame.
@@ -51,6 +52,9 @@ public class Scoreboard {
         this.frame = frame;
     }
 
+    /**
+     * Default constructor
+     */
     public Scoreboard() {
     }
 
@@ -62,7 +66,10 @@ public class Scoreboard {
         guesses = numGuesses;
     }
 
-
+    /**
+     * Sets the target word from WordleGame
+     * @param targetWord target word from Wordle game
+     */
     public void setTargetWord(String targetWord) {
         this.targetWord = targetWord;
     }
@@ -81,7 +88,6 @@ public class Scoreboard {
         try {
             if (!check) {
                 scoreboardFile.createNewFile();
-                //System.out.println("Scoreboard file created.");
             }
         }catch (IOException e){
             System.out.println("Error creating scoreboard file.");
@@ -103,7 +109,6 @@ public class Scoreboard {
 
             while (scan.hasNext()) {
                 line = scan.nextLine();
-                //System.out.println(line);
 
                 String[] dataArray = line.split(" ");
 
@@ -116,12 +121,9 @@ public class Scoreboard {
 
 
     /**
-     * Calculate the users score based on their number of guesses
+     * Calculate the user's score based on their number of guesses
      */
     public Integer calculateScore(){
-
-        //System.out.println("Guesses: " + guesses);
-
         if(guesses == 1){
             score = 10;
         }else if(guesses == 2){
@@ -175,12 +177,11 @@ public class Scoreboard {
             topKeys.add(highestKey);
             updatedMap.remove(highestKey);
         }
-        //dataMap = updatedMap; //update the original map by making it equal to the sorted map
     }
 
 
     /**
-     * Check if the users score is higher than the scores on the scoreboard
+     * Check if the user's score is higher than the scores on the scoreboard
      * If it is, add it to the dataMap and re-sort
      */
     public void addHighScore(){
@@ -224,9 +225,6 @@ public class Scoreboard {
 
             //re-sort the score with the new score added
             sortScores(3);
-            for(String s : dataMap.keySet()){
-                //System.out.println("Sorted map in addScore: " + s + " " + dataMap.get(s));
-            }
 
         }catch (NullPointerException npe){
             System.out.println("Error: updated scoreboard map is empty.");

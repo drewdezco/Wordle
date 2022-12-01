@@ -2,12 +2,13 @@ import javax.swing.*;
 import java.io.File;
 
 /**
- *Julia Barnes
- *Sarah Harrington
- *Andrew Hernandez
  *
  * The purpose of this class is to:
  * - Utilize other classes in file to have a fully functioning Wordle game with a graphical user interface
+ *
+ * @author Julia Barnes
+ * @author Sarah Harrington
+ * @author Andrew Hernandez
  */
 public class Main {
 
