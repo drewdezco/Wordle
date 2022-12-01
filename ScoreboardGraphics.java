@@ -155,7 +155,7 @@ public class ScoreboardGraphics {
         JButton playButton = new JButton("Play again");
         playButton.setPreferredSize(new Dimension(250, 125));
         playButton.setFont(new Font(playButton.getFont().getName(),Font.BOLD,25));
-        playButton.addActionListener(new ButtonListener(scoreboardFrame));
+        playButton.addActionListener(new ButtonListener());
         buttons.add(playButton);
     }
 }
