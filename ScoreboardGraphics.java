@@ -137,11 +137,12 @@ public class ScoreboardGraphics {
      * @return String user's name. May return null if user exits the popup window or presses the cancel button. Will
      * return empty string if user presses ok without typing anything.
      */
-    public static String getUserName() {
+    public static String getUserName(String targetWord) {
         /* note that this may return null if user exits the popup or presses the cancel button, and will return an
            empty string if user presses ok without typing anything
          */
-        String name = JOptionPane.showInputDialog("Please enter a name to be saved with your score:");
+        String message = "The target word was: " + targetWord + ". Please enter a name to be saved with your score:";
+        String name = JOptionPane.showInputDialog(message);
         return name;
     }
 

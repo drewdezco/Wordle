@@ -39,6 +39,8 @@ public class Scoreboard {
 
     private final int maxHighScores = 3;
 
+    String targetWord;
+
 
     /**
      * Constructor that instantiates the frame.
@@ -57,6 +59,11 @@ public class Scoreboard {
      */
     public void setGuesses(int numGuesses) {
         guesses = numGuesses;
+    }
+
+
+    public void setTargetWord(String targetWord) {
+        this.targetWord = targetWord;
     }
 
 
@@ -154,7 +161,7 @@ public class Scoreboard {
 
         // for the top x scores
         for(int i = 0; i < n; i++){
-            Integer highestValue = 0;
+            Integer highestValue = -1;
             String highestKey = "";
 
             // go through all, find top score and remove it from map
@@ -201,7 +208,7 @@ public class Scoreboard {
             //if the users score belongs on the scoreboard, take in their name to add
             if(checkScore){
                 //take in user input for their name
-                String name = ScoreboardGraphics.getUserName();
+                String name = ScoreboardGraphics.getUserName(targetWord);
 
                 //check if the name is already used as a key, if so update the score
                 while (dataMap.containsKey(name)) {
@@ -217,7 +224,7 @@ public class Scoreboard {
                     }else {
                         //else input a new name
                         System.out.println("Input name is taken. Please input a different name: ");
-                        name = ScoreboardGraphics.getUserName();
+                        name = ScoreboardGraphics.getUserName(targetWord);
                     }
                 }
 

@@ -25,6 +25,7 @@ public class Main {
 
     public static void playGame() {
         wordle.setTargetWord();
+        sb.setTargetWord(wordle.getTargetWord());
 
         System.out.println(wordle.getTargetWord());
 
