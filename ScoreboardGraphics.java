@@ -136,7 +136,7 @@ public class ScoreboardGraphics {
     public static String getUserName(String targetWord) {
         String message = "The target word was: " + targetWord + ". Please enter a name to be saved with your score:";
         String name = JOptionPane.showInputDialog(message);
-        return name.toLowerCase();
+        return name;
     }
 
     /**

@@ -191,7 +191,6 @@ public class Scoreboard {
 
         //call the users score
         calculateScore();
-        //System.out.println("Score: " + score);
 
         try {
             //boolean check to save if the users score belongs on the scoreboard
@@ -215,14 +214,17 @@ public class Scoreboard {
                 //take in user input for their name
                 String name = ScoreboardGraphics.getUserName(targetWord);
 
-                // if name exists already, update score
-                if (dataMap.containsKey(name.toLowerCase())) {
-                    if (dataMap.get(name.toLowerCase()) <= score) {
+                // only check name/store score if name is not null or empty
+                if (name != null && !name.equals("")) {
+                    // if name exists already, update score
+                    if (dataMap.containsKey(name.toLowerCase())) {
+                        if (dataMap.get(name.toLowerCase()) <= score) {
+                            dataMap.put(name.toLowerCase(), score);
+                        }
+                    } else {
+                        // add regularly
                         dataMap.put(name.toLowerCase(), score);
                     }
-                } else if (name != null && !name.equals("")) {
-                    // only add the score to the scoreboard hash map if the user actually entered a name
-                    dataMap.put(name.toLowerCase(), score);
                 }
             }
 
