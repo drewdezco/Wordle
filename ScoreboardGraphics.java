@@ -5,29 +5,31 @@ import java.util.ArrayList;
 
 
 /**
- * Julia Barnes
- * Sarah Harrington
- * Andrew Hernandez
+ * The purpose of this class is to:
+ * - display a scoreboard for users with the highest scores from a game of Wordle
+ * - display a button allowing the user to play the game again
  *
- * The purpose of this class is to display a scoreboard for users with the highest scores from a game.
+ * @author Julia Barnes
+ * @author Sarah Harrington
+ * @author Andrew Hernandez
  */
 public class ScoreboardGraphics {
-    private JFrame scoreboardFrame;
-    private JPanel scoreGrid = new JPanel(); // inner panel for scores
-    private JPanel scoreBoardGrid = new JPanel(); // outer panel to allow for empty border around scoreGrid
-    private JPanel buttons = new JPanel(); // panel for holding play again button
-    private GridLayout scoreLayout; // layout for scoreGrid
-    private GridLayout scoreBoardLayout = new GridLayout(1, 1); // layout for scoreBoardGrid
+    private final JFrame scoreboardFrame;
+    private final JPanel scoreGrid = new JPanel(); // inner panel for scores
+    private final JPanel scoreBoardGrid = new JPanel(); // outer panel to allow for empty border around scoreGrid
+    private final JPanel buttons = new JPanel(); // panel for holding play again button
+    private final GridLayout scoreLayout; // layout for scoreGrid
+    private final GridLayout scoreBoardLayout = new GridLayout(1, 1); // layout for scoreBoardGrid
 
-    JLabel headingLabel = new JLabel("Scoreboard");
+    private final JLabel headingLabel = new JLabel("Scoreboard");
 
-    private ArrayList<String> highScores;
+    private final ArrayList<String> highScores;
 
 
     /**
      * Constructor for Scoreboard Graphics
      * @param scoreboardFrame JFrame for scoreboard to be drawn in
-     * @param highScores Arraylist of Strings, each entry consisting of a name and a score
+     * @param highScores Top scores, each entry containing a user's name and their score
      */
     public ScoreboardGraphics(JFrame scoreboardFrame, ArrayList<String> highScores) {
         this.scoreboardFrame = scoreboardFrame;
@@ -37,7 +39,7 @@ public class ScoreboardGraphics {
 
 
     /**
-     * Formats each score label
+     * Formats each score label's alignment, text color, background color, font, and border
      * @param label JLabel to be formatted
      */
     public void formatScoreLabel(JLabel label) {
@@ -72,7 +74,7 @@ public class ScoreboardGraphics {
 
 
     /**
-     * Formats each JPanel to have the proper layout, and nests the two Panels together
+     * Formats each JPanel to have the proper layout, and nests the two score-related Panels together
      */
     public void formatPanels() {
         scoreLayout.setVgap(5);
@@ -112,7 +114,7 @@ public class ScoreboardGraphics {
         scoreboardFrame.getContentPane().add(scoreBoardGrid);
         scoreboardFrame.getContentPane().add(buttons);
 
-        // format frame
+        // format frame itself
         scoreboardFrame.setPreferredSize(new Dimension(500, 400));
         scoreboardFrame.setVisible(true);
         scoreboardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -121,7 +123,7 @@ public class ScoreboardGraphics {
 
 
     /**
-     * Calls the functions necessary to format the frame, labels, and panels needed to display the scoreboard.
+     * Calls the functions necessary to display the scoreboard.
      */
     public void setup() {
         formatScoreboardFrame();
@@ -133,14 +135,12 @@ public class ScoreboardGraphics {
 
 
     /**
-     * Displays a popup message to the user asking for their name, and returns the entered text.
-     * @return String user's name. May return null if user exits the popup window or presses the cancel button. Will
-     * return empty string if user presses ok without typing anything.
+     * Displays a popup message to the user notifying them of the target word and asking for their name. Returns the
+     * entered text.
+     * @return User's name. Null if user exits the popup window or presses the cancel button. Returns an empty
+     * string if user presses ok without typing anything.
      */
     public static String getUserName(String targetWord) {
-        /* note that this may return null if user exits the popup or presses the cancel button, and will return an
-           empty string if user presses ok without typing anything
-         */
         String message = "The target word was: " + targetWord + ". Please enter a name to be saved with your score:";
         String name = JOptionPane.showInputDialog(message);
         return name.toLowerCase();
