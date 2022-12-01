@@ -143,7 +143,7 @@ public class ScoreboardGraphics {
          */
         String message = "The target word was: " + targetWord + ". Please enter a name to be saved with your score:";
         String name = JOptionPane.showInputDialog(message);
-        return name;
+        return name.toLowerCase();
     }
 
 

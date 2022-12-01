@@ -211,9 +211,9 @@ public class Scoreboard {
                 String name = ScoreboardGraphics.getUserName(targetWord);
 
                 // if name exists already, update score
-                if (dataMap.containsKey(name)) {
-                    if (dataMap.get(name) < score) {
-                        dataMap.put(name, score);
+                if (dataMap.containsKey(name.toLowerCase())) {
+                    if (dataMap.get(name.toLowerCase()) < score) {
+                        dataMap.put(name.toLowerCase(), score);
                     }
                 } else if (name != null && !name.equals("")) {
                     // only add the score to the scoreboard hash map if the user actually entered a name
@@ -292,37 +292,5 @@ public class Scoreboard {
         addHighScore(); //check if users score is a high score, if so add to map and re-sort
         sendToGUI(); //convert scoreboard to array list, send to scoreboard GUI
         updateScoreboard(); //write the updated scoreboard back to the file
-    }
-}
-
-
-
-
-
-class tester{
-
-    private static Scoreboard sc;
-
-    public static void main(String[] args){
-
-        JFrame frame = new JFrame("Testing Scoreboard");
-        sc = new Scoreboard(frame);
-        sc.setGuesses(1);
-
-        sc.createScoreboard();
-
-        sc.readScoreboard();
-
-        sc.calculateScore();
-
-        sc.addHighScore();
-
-        sc.updateScoreboard();
-
-
-
-
-
-        //sc.masterScoreboard();
     }
 }
