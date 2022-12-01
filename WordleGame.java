@@ -235,7 +235,7 @@ public class WordleGame implements KeyListener {
                     else {
                         // display message stating to put in correct input
                         wordleGraphics.displayInvalidMessage();
-                        System.out.println("Input correct message");
+                        //System.out.println("Input correct message");
                         //System.out.println("Input correct message");
                     }
 

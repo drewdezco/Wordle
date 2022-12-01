@@ -51,6 +51,8 @@ public class Main {
 
         wordle.setTargetWord(); //Sets new target word for game
 
+        sb.setTargetWord(wordle.getTargetWord());
+
         wordle.resetTurnCounter(); //resets user's turn counter to determine score at the end if they win
 
         wordleFrame.setVisible(true); //sets frame visibility to true
