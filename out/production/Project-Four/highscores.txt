@@ -1,3 +1,3 @@
-Julia 10
-Ian 10
-Sar 8
+regin 10
+Dez 8
+plas 8
