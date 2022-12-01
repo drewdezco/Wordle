@@ -51,8 +51,13 @@ public class Scoreboard {
         this.frame = frame;
     }
 
+
+    /**
+     * Default Scoreboard constructor
+     */
     public Scoreboard() {
     }
+
 
     /**
      * Sets the number of guesses the user took
@@ -63,6 +68,10 @@ public class Scoreboard {
     }
 
 
+    /**
+     * Pulls the target word and sets it for printing in the scoreboard popup
+     * @param targetWord the word the user is trying to guess
+     */
     public void setTargetWord(String targetWord) {
         this.targetWord = targetWord;
     }
@@ -213,12 +222,12 @@ public class Scoreboard {
 
                 // if name exists already, update score
                 if (dataMap.containsKey(name.toLowerCase())) {
-                    if (dataMap.get(name.toLowerCase()) < score) {
+                    if (dataMap.get(name.toLowerCase()) <= score) {
                         dataMap.put(name.toLowerCase(), score);
                     }
                 } else if (name != null && !name.equals("")) {
                     // only add the score to the scoreboard hash map if the user actually entered a name
-                    dataMap.put(name, score);
+                    dataMap.put(name.toLowerCase(), score);
                 }
             }
 
