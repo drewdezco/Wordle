@@ -39,12 +39,14 @@ public class WordleGraphics{
      * @param label sets format for the label parameter given
      */
     public void setEmptyBoxFormat(JLabel label) { //empty
+        wordleFrame.setContentPane(wordlePanel);
         Border labelBorder = BorderFactory.createLineBorder(Color.lightGray, 3);//gray border
         label.setOpaque(true); //to show background color
         label.setBorder(labelBorder); //set border to border style
         label.setBackground(new Color(255,255,255));//white background
         label.setForeground(Color.BLACK); //set text color to black
         label.setFont(new Font("Helvetica Neue", Font.BOLD, 60)); //set label font to match Wordle font and approximate size
+        label.setText("");
     }
 
     /**
@@ -102,6 +104,10 @@ public class WordleGraphics{
         }
     }
 
+    public void setFrameToFalseVisibility() {
+        wordleFrame.setVisible(false);
+    }
+
     /**
      * Sets format for panel to be added into the frame
      */
@@ -137,6 +143,14 @@ public class WordleGraphics{
                 setEmptyBoxFormat(emptyLabel); //format each label to match empty box
                 wordleLabels[i][j] = emptyLabel; //set the new empty label to the correct indices
                 wordlePanel.add(wordleLabels[i][j]); //add label to panel
+            }
+        }
+    }
+
+    public void resetLabels() {
+        for (int i = 0; i < 6; i ++) { //rows
+            for (int j = 0; j < 5; j++) { //columns
+                setEmptyBoxFormat(wordleLabels[i][j]); //format each label to match empty box
             }
         }
     }
@@ -192,5 +206,15 @@ public class WordleGraphics{
     public void displayInvalidMessage() {
         String message = "Please enter a valid five-letter word";
         JOptionPane.showMessageDialog(null, message);
+    }
+
+
+    /**
+     * Removes all labels from wordlePanel.
+     */
+    public void reset() {
+        resetLabels();
+        rowValue = 0;
+        columnValue = 0;
     }
 }

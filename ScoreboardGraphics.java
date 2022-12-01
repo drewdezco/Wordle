@@ -15,6 +15,7 @@ public class ScoreboardGraphics {
     private JFrame scoreboardFrame;
     private JPanel scoreGrid = new JPanel(); // inner panel for scores
     private JPanel scoreBoardGrid = new JPanel(); // outer panel to allow for empty border around scoreGrid
+    private JPanel buttons = new JPanel(); // panel for holding play again button
     private GridLayout scoreLayout; // layout for scoreGrid
     private GridLayout scoreBoardLayout = new GridLayout(1, 1); // layout for scoreBoardGrid
 
@@ -81,7 +82,7 @@ public class ScoreboardGraphics {
         scoreBoardGrid.setLayout(scoreBoardLayout);
         scoreBoardGrid.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        // nest the two panels
+        // nest the score panels
         scoreBoardGrid.add(scoreGrid);
     }
 
@@ -106,14 +107,16 @@ public class ScoreboardGraphics {
         BoxLayout mainLayout = new BoxLayout(scoreboardFrame.getContentPane(), BoxLayout.Y_AXIS);
         scoreboardFrame.getContentPane().setLayout(mainLayout);
 
-        // add scoreboard content
+        // add scoreboard content to frame
         scoreboardFrame.getContentPane().add(headingLabel);
         scoreboardFrame.getContentPane().add(scoreBoardGrid);
+        scoreboardFrame.getContentPane().add(buttons);
 
         // format frame
-        scoreboardFrame.setMinimumSize(new Dimension(500, 400));
+        scoreboardFrame.setPreferredSize(new Dimension(500, 400));
         scoreboardFrame.setVisible(true);
         scoreboardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        scoreboardFrame.pack();
     }
 
 
@@ -125,6 +128,7 @@ public class ScoreboardGraphics {
         formatPanels();
         addLabels();
         formatHeadingLabel();
+        addPlayAgainButton();
     }
 
 
@@ -139,5 +143,18 @@ public class ScoreboardGraphics {
          */
         String name = JOptionPane.showInputDialog("Please enter a name to be saved with your score:");
         return name;
+    }
+
+
+    /**
+     * Adds button beneath scoreboard that restarts gameplay when pressed.
+     */
+    public void addPlayAgainButton() {
+        // add and format button object
+        JButton playButton = new JButton("Play again");
+        playButton.setPreferredSize(new Dimension(250, 125));
+        playButton.setFont(new Font(playButton.getFont().getName(),Font.BOLD,25));
+        playButton.addActionListener(new ButtonListener(scoreboardFrame));
+        buttons.add(playButton);
     }
 }
