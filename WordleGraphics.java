@@ -14,7 +14,9 @@ import java.awt.*;
  */
 public class WordleGraphics{
     private int rowValue = 0; //counter to keep track of row value
+
     private int columnValue = 0; //counter to keep track of column value
+
     private  JFrame wordleFrame; //empty frame reference
 
     private JPanel wordlePanel = new JPanel(); //create new panel for letters
@@ -32,7 +34,6 @@ public class WordleGraphics{
     public WordleGraphics(JFrame wordleFrame) {
         this.wordleFrame = wordleFrame;
     }
-
 
     /**
      * Sets format to match an empty box at the start of the Wordle program for each label
@@ -245,7 +246,6 @@ public class WordleGraphics{
         String message = "Please enter a valid five-letter word";
         JOptionPane.showMessageDialog(null, message);
     }
-
 
     /**
      * Method used to reset wordle game state

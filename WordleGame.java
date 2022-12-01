@@ -18,6 +18,7 @@ import static java.lang.System.exit;
  * - After each guess, tell the player if they got any letters exactly right as well as right in the wrong position
  * - Provide the real word at the end of guesses or if they get it correctly
  */
+
 public class WordleGame implements KeyListener {
 
     private final ArrayList<String> fiveLetterWords = new ArrayList<>(); //arraylist for storing five-letter words
@@ -28,7 +29,7 @@ public class WordleGame implements KeyListener {
 
     private WordleGraphics wordleGraphics; //Graphics class to pass into wordle
 
-    private Scoreboard sb = new Scoreboard(); //creates new scoreboard variable
+    private Scoreboard sb = new Scoreboard(); //creates new scoreboard class object
 
     /**
      * Constructor for WordleGame to take in wordle graphics, and set target word to null

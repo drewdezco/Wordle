@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+
 /**
  *Julia Barnes
  *Sarah Harrington
@@ -17,6 +18,7 @@ import java.util.Scanner;
  * - Write a new high score in with the correct position in the file
  * - Save changes to file
  */
+
 public class Scoreboard {
 
     private int guesses;
@@ -40,7 +42,6 @@ public class Scoreboard {
     private final int maxHighScores = 3;
 
     String targetWord;
-
 
     /**
      * Constructor that instantiates the frame.

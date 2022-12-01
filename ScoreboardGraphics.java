@@ -13,16 +13,16 @@ import java.util.ArrayList;
  * @author Sarah Harrington
  * @author Andrew Hernandez
  */
+
 public class ScoreboardGraphics {
+
     private final JFrame scoreboardFrame;
     private final JPanel scoreGrid = new JPanel(); // inner panel for scores
     private final JPanel scoreBoardGrid = new JPanel(); // outer panel to allow for empty border around scoreGrid
     private final JPanel buttons = new JPanel(); // panel for holding play again button
     private final GridLayout scoreLayout; // layout for scoreGrid
     private final GridLayout scoreBoardLayout = new GridLayout(1, 1); // layout for scoreBoardGrid
-
     private final JLabel headingLabel = new JLabel("Scoreboard");
-
     private final ArrayList<String> highScores;
 
 
@@ -37,7 +37,6 @@ public class ScoreboardGraphics {
         this.scoreLayout = new GridLayout(highScores.size(), 1);
     }
 
-
     /**
      * Formats each score label's alignment, text color, background color, font, and border
      * @param label JLabel to be formatted
@@ -50,7 +49,6 @@ public class ScoreboardGraphics {
         label.setBorder(new LineBorder(new Color(54, 86, 29, 255)));
         label.setFont(new Font(label.getFont().getName(), label.getFont().getStyle(), 25));
     }
-
 
     /**
      * Converts each String into a label and adds it to the grid of high scores. If there are no saved scores, creates
@@ -72,7 +70,6 @@ public class ScoreboardGraphics {
         }
     }
 
-
     /**
      * Formats each JPanel to have the proper layout, and nests the two score-related Panels together
      */
@@ -88,7 +85,6 @@ public class ScoreboardGraphics {
         scoreBoardGrid.add(scoreGrid);
     }
 
-
     /**
      * Formats the heading label's alignment and text size
      */
@@ -96,7 +92,6 @@ public class ScoreboardGraphics {
         headingLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headingLabel.setFont(new Font(headingLabel.getFont().getName(), headingLabel.getFont().getStyle(), 50));
     }
-
 
     /**
      * Adds the heading and score labels to the scoreboard JFrame, and formats the JFrame to function properly.
@@ -121,7 +116,6 @@ public class ScoreboardGraphics {
         scoreboardFrame.pack();
     }
 
-
     /**
      * Calls the functions necessary to display the scoreboard.
      */
@@ -132,7 +126,6 @@ public class ScoreboardGraphics {
         formatHeadingLabel();
         addPlayAgainButton();
     }
-
 
     /**
      * Displays a popup message to the user notifying them of the target word and asking for their name. Returns the
@@ -145,7 +138,6 @@ public class ScoreboardGraphics {
         String name = JOptionPane.showInputDialog(message);
         return name.toLowerCase();
     }
-
 
     /**
      * Adds button beneath scoreboard that restarts gameplay when pressed.

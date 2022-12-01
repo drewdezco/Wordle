@@ -21,6 +21,7 @@ public class Main {
 
     //objects of the other classes
     private static Scoreboard sb = new Scoreboard(scoreboardFrame); //create scoreboard using scoreboard frame
+
     private static WordleGame wordle = new WordleGame(wordleGraphicUserInterface, sb); //create new game of wordle using both GUIs
 
     /**
@@ -66,7 +67,6 @@ public class Main {
     public static void setScoreboardFrameVisbilityToFalse() {
         scoreboardFrame.setVisible(false); //sets scoreboard frame visibility to false
     }
-
 
     /**
      * Method used to run the program
