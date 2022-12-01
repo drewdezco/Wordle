@@ -152,7 +152,7 @@ public class Scoreboard {
 
         // for the top x scores
         for(int i = 0; i < n; i++){
-            Integer highestValue = 0;
+            Integer highestValue = -1;
             String highestKey = "";
 
             // go through all, find top score and remove it from map
