@@ -39,6 +39,8 @@ public class Scoreboard {
 
     private final int maxHighScores = 3;
 
+    String targetWord;
+
 
     /**
      * Constructor that instantiates the frame.
@@ -55,6 +57,11 @@ public class Scoreboard {
      */
     public void setGuesses(int numGuesses) {
         guesses = numGuesses;
+    }
+
+
+    public void setTargetWord(String targetWord) {
+        this.targetWord = targetWord;
     }
 
 
@@ -199,12 +206,12 @@ public class Scoreboard {
             //if the users score belongs on the scoreboard, take in their name to add
             if(checkScore){
                 //take in user input for their name
-                String name = ScoreboardGraphics.getUserName();
+                String name = ScoreboardGraphics.getUserName(targetWord);
 
                 //check if the name is already used as a key, if so have the user input a new name
                 while (dataMap.containsKey(name)) {
                     System.out.println("Input name is taken. Please input a different name: ");
-                    name = ScoreboardGraphics.getUserName();
+                    name = ScoreboardGraphics.getUserName(targetWord);
                 }
 
                 // only add the score to the scoreboard hash map if the user actually entered a name
