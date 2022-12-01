@@ -1,3 +1,0 @@
-regin 10
-Dez 8
-plas 8
