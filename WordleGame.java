@@ -22,13 +22,13 @@ public class WordleGame implements KeyListener {
 
     private final ArrayList<String> fiveLetterWords = new ArrayList<>(); //arraylist for storing five-letter words
 
-    private static int turnCounter = 1;
+    private static int turnCounter = 1; //turn counter set to one to count for player turns
 
     private String targetWord; //target word chosen at random variable
 
     private WordleGraphics wordleGraphics; //Graphics class to pass into wordle
 
-    private Scoreboard sb = new Scoreboard();
+    private Scoreboard sb = new Scoreboard(); //creates new scoreboard variable
 
     /**
      * Constructor for WordleGame to take in wordle graphics, and set target word to null
@@ -36,9 +36,9 @@ public class WordleGame implements KeyListener {
      * @param sb instance of Scoreboard class
      */
     public WordleGame(WordleGraphics wordleGraphics, Scoreboard sb) {
-        targetWord = null;
-        this.wordleGraphics = wordleGraphics;
-        this.sb = sb;
+        targetWord = null; //empty target word
+        this.wordleGraphics = wordleGraphics; //set wordle graphics
+        this.sb = sb; //set scoreboard instance
     }
 
     /**
@@ -56,7 +56,7 @@ public class WordleGame implements KeyListener {
      */
     public static int generateNumber(int range) {
 
-        return (int)(Math.random() * range);
+        return (int)(Math.random() * range); //finds random number depending on range given
     }
 
     /**
@@ -66,19 +66,22 @@ public class WordleGame implements KeyListener {
      */
     public void fillArrayList(File filename) {
         try {
-            Scanner scan = new Scanner(filename);
-            while (scan.hasNext()) {
-                fiveLetterWords.add(scan.next());
+            Scanner scan = new Scanner(filename); // new scanner based on filename
+            while (scan.hasNext()) { //while file has next
+                fiveLetterWords.add(scan.next()); ///add word to fiveletterwords arraylist
             }
         }
-        catch (FileNotFoundException e) {
-            System.out.println("ERROR: File not found.");
-            exit(0);
+        catch (FileNotFoundException e) { //if file is not found
+            System.out.println("ERROR: File not found."); //print error
+            exit(0); //exit the program
         }
     }
 
+    /**
+     * This method is used to reset the turn counter to 1 in the event of a new game
+     */
     public void resetTurnCounter() {
-        turnCounter = 1;
+        turnCounter = 1; //set turn counter to 1
     }
 
     /**
@@ -87,14 +90,14 @@ public class WordleGame implements KeyListener {
      * @return String
      */
     public String generateRandomWord() {
-        return fiveLetterWords.get(generateNumber(4500));
+        return fiveLetterWords.get(generateNumber(4500)); //find random word based on range
     }
 
     /**
      * Setter method for target word in class
      */
     public void setTargetWord() {
-        targetWord = generateRandomWord();
+        targetWord = generateRandomWord(); //call to set a new target word by generating a random one
     }
 
     /**
@@ -109,7 +112,7 @@ public class WordleGame implements KeyListener {
      * Checks if current user guess in row is in the list of possible words
      * @return true if it is in the list, false if it is not
      */
-    public boolean checkValidGuess() { //functional AFAIK
+    public boolean checkValidGuess() {
         wordleGraphics.setUserGuess(); //set user input in current row
 
         String[] checkArray = wordleGraphics.getUserGuess();//set array equal to user guess
@@ -138,7 +141,7 @@ public class WordleGame implements KeyListener {
             StringBuilder checkInWords = new StringBuilder(); //instantiate empty string
 
             for (int i = 0; i < 5; i++) { //input each letter in array
-                checkInWords.append(checkArray[i]);
+                checkInWords.append(checkArray[i]); //add each letter to array
             }
 
 
@@ -161,11 +164,8 @@ public class WordleGame implements KeyListener {
 
             }
             if(targetWord.equalsIgnoreCase(String.valueOf(checkInWords))) { //if target word is equal to user guess
-                System.out.println("You guessed the correct word in " + turnCounter + " guesses!");
-                // load the scoreboard
-                //wordleGraphics.setFrameToFalseVisibility();
-                sb.setGuesses(turnCounter);
-                sb.masterScoreboard();
+                sb.setGuesses(turnCounter); //update turncounter
+                sb.masterScoreboard(); //setup scoreboard
             }
             else {
                 turnCounter++; //adds to turn counter after checking column successfully
@@ -249,8 +249,8 @@ public class WordleGame implements KeyListener {
 
                         wordleGraphics.setFrameToFalseVisibility();
                         //show scoreboard here
-                        sb.setGuesses(turnCounter);
-                        sb.masterScoreboard();
+                        sb.setGuesses(turnCounter); //update turncounter
+                        sb.masterScoreboard(); //setup scoreboard
                     }
                 }
             }
