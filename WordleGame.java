@@ -9,14 +9,15 @@ import static java.lang.System.exit;
 
 
 /**
- *Julia Barnes
- *Sarah Harrington
- *Andrew Hernandez
  * The purpose of this class is to:
  * - Give a player six guesses to guess a five-letter word that is chosen at random from a list
  * - Check to see if the word guessed is a real five-letter word
  * - After each guess, tell the player if they got any letters exactly right as well as right in the wrong position
  * - Provide the real word at the end of guesses or if they get it correctly
+ *
+ * @author Julia Barnes
+ * @author Sarah Harrington
+ * @author Andrew Hernandez
  */
 
 public class WordleGame implements KeyListener {

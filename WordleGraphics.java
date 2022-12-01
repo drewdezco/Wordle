@@ -3,14 +3,15 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 /**
- *Julia Barnes
- *Sarah Harrington
- *Andrew Hernandez
  *
  * The purpose of this class is to:
  * - Display the game Wordle using a graphical interface
  * - Display the correct word at the end of the game
  * - If user guessed correctly, save score on scoreboard and display that to the user
+ *
+ * @author Julia Barnes
+ * @author Sarah Harrington
+ * @author Andrew Hernandez
  */
 public class WordleGraphics{
     private int rowValue = 0; //counter to keep track of row value
@@ -217,7 +218,7 @@ public class WordleGraphics{
 
     /**
      * Method used to set current column value
-     * @param columnValue
+     * @param columnValue new column value
      */
     public void setColumnValue(int columnValue) {
         this.columnValue = columnValue;
@@ -225,7 +226,7 @@ public class WordleGraphics{
 
     /**
      * Method used to set current row value
-     * @param rowValue
+     * @param rowValue new row value
      */
     public void setRowValue(int rowValue) {
         this.rowValue = rowValue;
