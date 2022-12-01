@@ -23,7 +23,7 @@ public class WordleGraphics{
 
     private  JLabel wordleLabels[][] = new JLabel[6][5]; //create 2d array for storing labels
 
-    private String userGuess[] = new String[5];
+    private String userGuess[] = new String[5]; //1d array for user guess
 
     /**
      * 1 argument constructor for Wordle Graphics
@@ -93,17 +93,25 @@ public class WordleGraphics{
         label.setBackground(new Color(120, 124, 126));
     }
 
+    /**
+     * Method used to set format option for each letter in specified column
+     * @param option Sets format based on one of three options
+     * @param column Sets format to specified column in the row
+     */
     public void setColumnFormat(int option, int column) {
         switch (option) {
-            case 1:setCorrectSpotAndCorrectLetterBoxFormat(wordleLabels[rowValue][column]);
+            case 1:setCorrectSpotAndCorrectLetterBoxFormat(wordleLabels[rowValue][column]); //set as the correct spot and letter box format
                 break;
-            case 2:setIncorrectSpotAndCorrectLetterBoxFormat(wordleLabels[rowValue][column]);
+            case 2:setIncorrectSpotAndCorrectLetterBoxFormat(wordleLabels[rowValue][column]); //set as incorrect spot and correct letter box format
                 break;
-            case 3:setIncorrectSpotAndLetterBoxFormat(wordleLabels[rowValue][column]);
+            case 3:setIncorrectSpotAndLetterBoxFormat(wordleLabels[rowValue][column]); //set incorrect spot and letter box format
                 break;
         }
     }
 
+    /**
+     * Method used to set frame visibility to false for looping
+     */
     public void setFrameToFalseVisibility() {
         wordleFrame.setVisible(false);
     }
@@ -123,18 +131,25 @@ public class WordleGraphics{
 
     }
 
+    /**
+     * Method used to set user guess in each column
+     */
     public void setUserGuess() {
         for (int i = 0; i < 5; i++) {
             userGuess[i] = wordleLabels[rowValue][i].getText();
         }
     }
 
+    /**
+     * Method used to get the users guess for comparison
+     * @return the guess the user has input
+     */
     public String[] getUserGuess() {
         return userGuess;
     }
 
     /**
-     * Adds each label to the panel of 6x5
+     * Method used to add each label to the panel of 6x5
      */
     public void addLabelsToPanel() {
         for (int i = 0; i < 6; i ++) { //rows
@@ -147,6 +162,9 @@ public class WordleGraphics{
         }
     }
 
+    /**
+     * Method used to reset all labels at the start of a new game
+     */
     public void resetLabels() {
         for (int i = 0; i < 6; i ++) { //rows
             for (int j = 0; j < 5; j++) { //columns
@@ -156,52 +174,72 @@ public class WordleGraphics{
     }
 
     /**
-     * Formats frame for Wordle
+     * Method used to format the frame for Wordle
      */
     public void formatWordleFrame() {
 
-        wordleFrame.add(wordlePanel);
+        wordleFrame.add(wordlePanel); //add panel to frame
 
-        wordleFrame.setPreferredSize(new Dimension(668, 815));
+        wordleFrame.setPreferredSize(new Dimension(668, 815)); //set preferred frame size
 
         wordleFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //program ends when window closes
 
     }
 
     /**
-     * Calls functions to format frame, panel, and labels
+     * Method to call functions to format frame, panel, and labels
      */
     public void setup() {
-        formatWordleFrame();
+        formatWordleFrame(); //formate frame
 
-        formatWordlePanel();
+        formatWordlePanel(); //format panels
 
-        addLabelsToPanel();
+        addLabelsToPanel(); //add labels to the panels
     }
 
 
+    /**
+     * Method used to get current column value
+     * @return columnValue
+     */
     public int getColumnValue() {
         return columnValue;
     }
 
+    /**
+     * Method used to get current row value
+     * @return rowValue
+     */
     public int getRowValue() {
         return rowValue;
     }
 
+    /**
+     * Method used to set current column value
+     * @param columnValue
+     */
     public void setColumnValue(int columnValue) {
         this.columnValue = columnValue;
     }
 
+    /**
+     * Method used to set current row value
+     * @param rowValue
+     */
     public void setRowValue(int rowValue) {
         this.rowValue = rowValue;
     }
 
+    /**
+     * Method used to get the JLabel array in order to
+     * @return wordleLabels
+     */
     public JLabel[][] getWordleLabels() {
         return wordleLabels;
     }
 
     /**
-     * Displays simple popup message telling user to enter a valid guess
+     * Method used to display simple popup message telling user to enter a valid guess
      */
     public void displayInvalidMessage() {
         String message = "Please enter a valid five-letter word";
@@ -210,7 +248,7 @@ public class WordleGraphics{
 
 
     /**
-     * Removes all labels from wordlePanel.
+     * Method used to reset wordle game state
      */
     public void reset() {
         resetLabels();
