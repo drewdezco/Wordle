@@ -11,56 +11,69 @@ import java.io.File;
  */
 public class Main {
 
-    private static File wordsFile = new File("words.txt");
+    private static File wordsFile = new File("words.txt"); //create a new file that points to words.txt in project folder
 
-    private static JFrame wordleFrame = new JFrame("Wordle++");
+    private static JFrame wordleFrame = new JFrame("Wordle++"); //create new frame with the name Wordle++
 
-    private static JFrame scoreboardFrame = new JFrame("Scoreboard");
+    private static JFrame scoreboardFrame = new JFrame("Scoreboard"); //create new scoreboard frame with name Scoreboard
 
-    private static WordleGraphics wordleGraphicUserInterface = new WordleGraphics(wordleFrame);
+    private static WordleGraphics wordleGraphicUserInterface = new WordleGraphics(wordleFrame); //create new Wordle GUI using wordle frame
 
     //objects of the other classes
-    private static Scoreboard sb = new Scoreboard(scoreboardFrame);
-    private static WordleGame wordle = new WordleGame(wordleGraphicUserInterface, sb);
+    private static Scoreboard sb = new Scoreboard(scoreboardFrame); //create scoreboard using scoreboard frame
+    private static WordleGame wordle = new WordleGame(wordleGraphicUserInterface, sb); //create new game of wordle using both GUIs
 
+    /**
+     * This method is used to set up the frames for the GUI, as well as set up the game for Wordle
+     */
     public static void playGame() {
-        wordle.setTargetWord();
-        sb.setTargetWord(wordle.getTargetWord());
+        wordle.setTargetWord(); //get a random word as the target word
 
-        System.out.println(wordle.getTargetWord());
+        sb.setTargetWord(wordle.getTargetWord()); //set the target word for scoreboard
 
-        // clear anything previously displayed in frame & reset wordleGUI
-        //wordleFrame.getContentPane().removeAll();
-        //wordleGraphicUserInterface.reset();
+        System.out.println(wordle.getTargetWord()); //print the target word in order to help demonstration, usually this would be removed
 
-        wordleGraphicUserInterface.setup();
+        wordleGraphicUserInterface.setup(); //setup Wordle GUI
 
-        wordleFrame.addKeyListener(wordle);
+        wordleFrame.addKeyListener(wordle); //add keylistener to Wordle GUI
 
         wordleFrame.pack(); //display window
 
-        wordleFrame.setVisible(true);
-
-        //System.out.println(wordleGraphicUserInterface.askUserPlayAgain());
+        wordleFrame.setVisible(true); //Set the window as visible.
     }
 
+    /**
+     * This method is used to reset the Wordle game state so that you can continue playing after the game has finished
+     */
     public static void resetGame() {
-        wordleGraphicUserInterface.reset();
-        wordle.setTargetWord();
-        wordle.resetTurnCounter();
-        wordleFrame.setVisible(true);
-        System.out.println(wordle.getTargetWord());
+
+        wordleGraphicUserInterface.reset(); //resets Wordle GUI
+
+        wordle.setTargetWord(); //Sets new target word for game
+
+        wordle.resetTurnCounter(); //resets user's turn counter to determine score at the end if they win
+
+        wordleFrame.setVisible(true); //sets frame visibility to true
+
+        System.out.println(wordle.getTargetWord()); //print the target word in order to help demonstration, usually this would be removed
     }
 
+    /**
+     * Method used to set scoreboard's frame visibility to false for looping
+     */
     public static void setScoreboardFrameVisbilityToFalse() {
-        scoreboardFrame.setVisible(false);
+        scoreboardFrame.setVisible(false); //sets scoreboard frame visibility to false
     }
 
 
+    /**
+     * Method used to run the program
+     * @param args
+     */
     public static void main(String[] args) {
 
-        wordle.fillArrayList(wordsFile);
+        wordle.fillArrayList(wordsFile); //fills array with random words
 
-        playGame();
+        playGame(); //plays the game wordle
     }
 }
