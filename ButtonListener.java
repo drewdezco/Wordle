@@ -23,7 +23,7 @@ public class ButtonListener implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        frame.getContentPane().removeAll();
-        Main.playGame();
+        Main.resetGame();
+        Main.setScoreboardFrameVisbilityToFalse();
     }
 }

@@ -116,6 +116,7 @@ public class ScoreboardGraphics {
         scoreboardFrame.setPreferredSize(new Dimension(500, 400));
         scoreboardFrame.setVisible(true);
         scoreboardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        scoreboardFrame.pack();
     }
 
 

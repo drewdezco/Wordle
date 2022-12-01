@@ -15,10 +15,12 @@ public class Main {
 
     private static JFrame wordleFrame = new JFrame("Wordle++");
 
+    private static JFrame scoreboardFrame = new JFrame("Scoreboard");
+
     private static WordleGraphics wordleGraphicUserInterface = new WordleGraphics(wordleFrame);
 
     //objects of the other classes
-    private static Scoreboard sb = new Scoreboard(wordleFrame);
+    private static Scoreboard sb = new Scoreboard(scoreboardFrame);
     private static WordleGame wordle = new WordleGame(wordleGraphicUserInterface, sb);
 
 
@@ -28,8 +30,8 @@ public class Main {
         System.out.println(wordle.getTargetWord());
 
         // clear anything previously displayed in frame & reset wordleGUI
-        wordleFrame.getContentPane().removeAll();
-        wordleGraphicUserInterface.reset();
+        //wordleFrame.getContentPane().removeAll();
+        //wordleGraphicUserInterface.reset();
 
         wordleGraphicUserInterface.setup();
 
@@ -40,6 +42,18 @@ public class Main {
         wordleFrame.setVisible(true);
 
         //System.out.println(wordleGraphicUserInterface.askUserPlayAgain());
+    }
+
+    public static void resetGame() {
+        wordleGraphicUserInterface.reset();
+        wordle.setTargetWord();
+        wordle.resetTurnCounter();
+        wordleFrame.setVisible(true);
+        System.out.println(wordle.getTargetWord());
+    }
+
+    public static void setScoreboardFrameVisbilityToFalse() {
+        scoreboardFrame.setVisible(false);
     }
 
 

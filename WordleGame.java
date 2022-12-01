@@ -77,6 +77,10 @@ public class WordleGame implements KeyListener {
         }
     }
 
+    public void resetTurnCounter() {
+        turnCounter = 1;
+    }
+
     /**
      * Gets target word from the word list (specific range given in assignment)
      * Usually I would take the size of the arraylist for the random parameter
@@ -140,6 +144,7 @@ public class WordleGame implements KeyListener {
             if(targetWord.equalsIgnoreCase(String.valueOf(checkInWords))) { //if target word is equal to user guess
                 System.out.println("You guessed the correct word in " + turnCounter + " guesses!");
                 // load the scoreboard
+                wordleGraphics.setFrameToFalseVisibility();
                 sb.setGuesses(turnCounter);
                 sb.masterScoreboard();
             }
@@ -238,6 +243,7 @@ public class WordleGame implements KeyListener {
                     if (checkValidGuess() == true) {
                         checkColumn();
 
+                        wordleGraphics.setFrameToFalseVisibility();
                         //show scoreboard here
                         sb.setGuesses(turnCounter);
                         sb.masterScoreboard();
