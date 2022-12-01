@@ -141,13 +141,6 @@ public class WordleGame implements KeyListener {
                 checkInWords.append(checkArray[i]);
             }
 
-            if(targetWord.equalsIgnoreCase(String.valueOf(checkInWords))) { //if target word is equal to user guess
-                System.out.println("You guessed the correct word in " + turnCounter + " guesses!");
-                // load the scoreboard
-                wordleGraphics.setFrameToFalseVisibility();
-                sb.setGuesses(turnCounter);
-                sb.masterScoreboard();
-            }
 
             for (int i = 0; i < 5; i ++) {
 
@@ -165,8 +158,19 @@ public class WordleGame implements KeyListener {
                     //System.out.print(": Not here period!!\n");
                     wordleGraphics.setColumnFormat(3, i);//format as incorrect letter incorrect spot
                 }
+
             }
-            turnCounter++; //adds to turn counter after checking column successfully
+            if(targetWord.equalsIgnoreCase(String.valueOf(checkInWords))) { //if target word is equal to user guess
+                System.out.println("You guessed the correct word in " + turnCounter + " guesses!");
+                // load the scoreboard
+                //wordleGraphics.setFrameToFalseVisibility();
+                sb.setGuesses(turnCounter);
+                sb.masterScoreboard();
+            }
+            else {
+                turnCounter++; //adds to turn counter after checking column successfully
+            }
+
         }
         else {
             // message stating to input a five-letter word

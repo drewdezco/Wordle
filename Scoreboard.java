@@ -48,6 +48,8 @@ public class Scoreboard {
         this.frame = frame;
     }
 
+    public Scoreboard() {
+    }
 
     /**
      * Sets the number of guesses the user took

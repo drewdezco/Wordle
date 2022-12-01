@@ -23,7 +23,6 @@ public class Main {
     private static Scoreboard sb = new Scoreboard(scoreboardFrame);
     private static WordleGame wordle = new WordleGame(wordleGraphicUserInterface, sb);
 
-
     public static void playGame() {
         wordle.setTargetWord();
 
