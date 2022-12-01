@@ -201,10 +201,22 @@ public class Scoreboard {
                 //take in user input for their name
                 String name = ScoreboardGraphics.getUserName();
 
-                //check if the name is already used as a key, if so have the user input a new name
+                //check if the name is already used as a key, if so update the score
                 while (dataMap.containsKey(name)) {
-                    System.out.println("Input name is taken. Please input a different name: ");
-                    name = ScoreboardGraphics.getUserName();
+
+                    String input = String.valueOf(JOptionPane.showConfirmDialog(frame, "This player name is taken. Type 'update' to update an existing score, or 'add new' to add a new player to the scoreboard.", "Input Name Exists!", JOptionPane.YES_NO_OPTION ));
+
+                    //if the user wants to update the score
+                    if(input.toLowerCase().equals("update")){
+
+                        //write over the existing score
+                        dataMap.put(name, score);
+
+                    }else {
+                        //else input a new name
+                        System.out.println("Input name is taken. Please input a different name: ");
+                        name = ScoreboardGraphics.getUserName();
+                    }
                 }
 
                 // only add the score to the scoreboard hash map if the user actually entered a name
